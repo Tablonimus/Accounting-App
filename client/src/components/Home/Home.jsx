@@ -1,7 +1,5 @@
 import React from "react";
-import BottomBar from "../Bars/BottomBar";
 import NavBarHome from "../Bars/NavBarHome";
-import SideBarHome from "../Bars/SideBarHome";
 import { Card } from "flowbite-react";
 import plaza1 from "../../assets/images/plaza1.jpg";
 export default function Home() {
@@ -59,7 +57,7 @@ export default function Home() {
         </div>
       </div>
       <div className="fixed bottom-0">
-        <BottomBar />
+    
       </div>
     </div>
   );

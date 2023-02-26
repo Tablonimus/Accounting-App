@@ -1,9 +1,7 @@
 import React from "react";
-import BottomBar from "../Bars/BottomBar";
 import NavBarHome from "../Bars/NavBarHome";
-import SideBarHome from "../Bars/SideBarHome";
 import { Card } from "flowbite-react";
-import plaza1 from "../../assets/images/plaza1.jpg";
+import AdminBar from "./AdminBar"
 
 export default function AdminHome() {
   return (
@@ -12,7 +10,7 @@ export default function AdminHome() {
         <NavBarHome />
       </div>
       <div className="flex flex-row">
-        <SideBarHome />
+  
         <div className="flex flex-row h-full bg-red-500  ">
           <div className="max-w-sm m-2  ">
             <Card imgSrc="https://flowbite.com/docs/images/blog/image-1.jpg">
@@ -39,7 +37,7 @@ export default function AdminHome() {
         </div>
       </div>
       <div className="fixed bottom-0">
-        <BottomBar />
+        <AdminBar />
       </div>
     </div>
   );

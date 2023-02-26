@@ -4,12 +4,15 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import Landing from "./components/Landing/Landing";
+
 import Home from "../src/components/Home/Home";
 import AdminHome from "./components/AdminView/AdminHome";
-import EmitirFactura from "./components/AdminView/EmitirFactura";
-import GastosKw from "./components/GastosKw/GastosKw";
-import GenerarRecibo from "./components/GenerarRecibo/GenerarRecibo";
+
+
+import Batches from "./components/Batches/Batches";
+import Billing from "./components/Billing/Billing";
+import Services from "./components/Services/Services";
+import Login from "./components/Login/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,12 +25,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/"} element={<Landing />} />
+        <Route path={"/"} element={<Login />} />
         <Route path={"/home"} element={<Home />} />
-        <Route path={"/adminhome"} element={<AdminHome />} />
-        <Route path={"/emitirfc"} element={<EmitirFactura />} />
-        <Route path={"/gastoskw"} element={<GastosKw />} />
-        <Route path={"/generar-recibo"} element={<GenerarRecibo />} />
+        <Route path={"/admin"} element={<AdminHome />} />
+        <Route path={"/batches"} element={<Batches />} />
+        <Route path={"/billing"} element={<Billing />} />
+        <Route path={"/services"} element={<Services/>} />
+   
       </Routes>
     </BrowserRouter>
   );
