@@ -1,14 +1,15 @@
-import React from "react";
-import NavBarHome from "../Bars/NavBarHome";
-import { Card } from "flowbite-react";
-import plaza1 from "../../assets/images/plaza1.jpg";
-export default function Home() {
+import { Card } from 'flowbite-react'
+import React from 'react'
+import NavBarHome from '../Bars/NavBarHome'
+
+export default function Landing() {
   return (
-    <div className="w-full h-full flex flex-col bg-gray-900">
-      <div>
-        <NavBarHome />
-      </div>
-      <div className="flex flex-row">
+    <div id="login" className='h-screen'>
+
+        <NavBarHome/>
+
+
+        <div className="flex flex-row">
         <div className="grid grid-cols-2 border ">
           <div className="max-w-sm m-2  ">
             <Card imgSrc="https://flowbite.com/docs/images/blog/image-1.jpg">
@@ -56,7 +57,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0"></div>
     </div>
-  );
+  )
 }
