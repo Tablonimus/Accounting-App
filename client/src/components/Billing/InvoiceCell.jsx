@@ -7,6 +7,7 @@ export default function InvoiceCell({ invoices }) {
       <Table hoverable={true}>
         <Table.Head>
           <Table.HeadCell>N°</Table.HeadCell>
+          <Table.HeadCell>Lote</Table.HeadCell>
           <Table.HeadCell>Remitente</Table.HeadCell>
           <Table.HeadCell>Total</Table.HeadCell>
           <Table.HeadCell>Detalle</Table.HeadCell>
@@ -27,6 +28,7 @@ export default function InvoiceCell({ invoices }) {
                     {invoices.id}
                   </Table.Cell>
 
+                  <Table.Cell>{invoices.numero_lote}</Table.Cell>
                   <Table.Cell>{invoices.remitente}</Table.Cell>
                   <Table.Cell>{invoices.total}</Table.Cell>
                   <Table.Cell>{invoices.detalle}</Table.Cell>
