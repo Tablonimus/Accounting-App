@@ -7,7 +7,7 @@ export default function NavBarHome() {
   let loggedUser = false;
 
   return (
-    <Navbar rounded={true} class="sticky top-0 bg-gray-100 h-18 pl-5 py-2">
+    <Navbar rounded={true} class="z-30 sticky top-0 bg-gray-100 h-18 pl-5 py-2">
       <Navbar.Brand href="">
         <img src={homeslogo} className="mr-3 h-6 sm:h-9" alt="" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">

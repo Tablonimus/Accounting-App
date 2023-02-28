@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import "./login.css"
 
 export default function Login() {
   const loggedUser = useSelector((state) => state.loggedUser);
@@ -26,7 +27,7 @@ export default function Login() {
     setError("");
     try {
       // await login(user.email, user.password);
-      if (user.email === "" || user.password === "") {
+      if (user.mail === "" || user.password === "") {
         alert("Must fill all inputs");
       } else {
         dispatch(login(user)).then((response) => console.log(response));
@@ -52,9 +53,9 @@ export default function Login() {
             <Label htmlFor="mail" value="Tu email" />
           </div>
           <TextInput
-            id="mail"
-            type="mail"
-            placeholder="nombre@lugarescondido.com"
+            id="numero_lote"
+            type="text"
+            placeholder="Letra y numero... Ej: A01"
             required={true}
             onChange={(e) => handleChange(e)}
           />

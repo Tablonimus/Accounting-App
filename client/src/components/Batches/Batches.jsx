@@ -16,10 +16,12 @@ export default function Batches() {
 
   const batches = useSelector((state) => state.batch);
 
+
+
   return (
     <div className="flex flex-col justify-between h-screen">
       <NavBarHome />
-      <div className="p-2 gap-2 bg-gray-200 h-16  w-screen flex flex-row  justify-center  ">
+      <div className="lg:grid lg:grid-cols-6 p-3 flex flex-col gap-2 ">
         <div className="flex flex-col">
           <div class="relative mb-5">
             <div class="flex absolute inset-y-0 right-0 items-center pl-3 pt-2 pointer-events-none">

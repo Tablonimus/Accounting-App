@@ -4,6 +4,7 @@ const initialState = {
   batch: [],
   service: [],
   loggedUser: [],
+  invoice: [],
   detail: {},
 };
 
@@ -30,6 +31,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         service: payload,
+      };
+    }
+    case action.GET_INVOICE: {
+      return {
+        ...state,
+        invoice: payload.reverse(),
       };
     }
     case action.CREATE_BATCH: {

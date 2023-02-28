@@ -9,7 +9,6 @@ import home from "../../assets/images/homeslogo.png";
 export default function AdminBar() {
   const url = window.location.pathname;
 
-  console.log(url);
   return (
     <div className="flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-screen sticky bottom-0 bg-gray-100 ">
       <Link to="/services">

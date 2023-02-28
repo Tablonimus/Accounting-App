@@ -24,15 +24,18 @@ export default function Services() {
   return (
     <div className="bg-gray-200 flex flex-col justify-between h-screen">
       <NavBarHome />
-      
 
-        <div className="mt-2">
-          <CreateServiceModal />
+      <div className="lg:grid lg:grid-cols-2   p-3 flex flex-col gap-2 ">
+        <div className="flex flex-col gap-2 justify-center items-center bg-gray-300 rounded-lg shadow-lg p-3">
+          <div className=" grid grid-cols-2 text-center items-center justify-center">
+            <h2 className="font-semibold w-96">SERVICIOS ACTIVOS</h2>
+            <CreateServiceModal />
+          </div>
+
+          <div className="bg-gray-200 flex justify-center overflow-auto shadow-lg rounded-lg">
+            <ServicesCell services={services} />
+          </div>
         </div>
-      
-
-      <div className="bg-gray-200 flex flex-col overflow-auto">
-        <ServicesCell services={services} />
       </div>
 
       <AdminBar />

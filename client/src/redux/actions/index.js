@@ -22,12 +22,8 @@ export function login(payload) {
         payload,
       });
     } catch (error) {
-      // return dispatch({
-      //   type: action.LOGIN,
-      //   payload: error.response.data,
-      // });
       window.location.reload(true);
-      alert("Incorrect email or password");
+      alert("Mail o contraseña incorrectos");
     }
   };
 }
@@ -73,6 +69,20 @@ export function getService() {
     }
   };
 }
+
+export function getInvoice() {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get(`${url}/billing`);
+      dispatch({
+        type: action.GET_INVOICE,
+        payload: json.data,
+      });
+    } catch (error) {
+      return `Server Error, try again later: ${error}`;
+    }
+  };
+}
 //----------POST---------
 export function createBatch(payload) {
   return async function (dispatch) {
@@ -106,6 +116,7 @@ export function createService(payload) {
 }
 export function createInvoice(payload) {
   return async function (dispatch) {
+    console.log("payloadCREATEINVOICE", payload);
     try {
       let json = await axios.post(`${url}/billing/newbill`, payload);
       dispatch({

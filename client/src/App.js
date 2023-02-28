@@ -14,23 +14,27 @@ import Services from "./components/Services/Services";
 import Login from "./components/Login/Login";
 import Landing from "./components/Landing/Landing";
 import { setAuthToken } from "./components/BrowserHistory/setAuthToken";
-import { getUserProfile } from "./redux/actions";
+import { getInvoice, getUserProfile } from "./redux/actions";
 
 function App() {
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
+  // useEffect(() => {
+  //   dispatch(getInvoice());
 
-  if (token) {
-    setAuthToken(token);
-  }
+  // }, []);
 
-  useEffect(() => {
+  // const token = localStorage.getItem("token");
+  // const id = localStorage.getItem("id");
 
-    dispatch(getUserProfile(id));
-  }, [dispatch]);
+  // if (token) {
+  //   setAuthToken(token);
+  // }
 
+  // useEffect(() => {
+
+  //   dispatch(getUserProfile(id));
+  // }, [dispatch]);
 
   return (
     <BrowserRouter>

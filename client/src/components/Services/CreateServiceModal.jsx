@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { createService } from "../../redux/actions";
-import add from "../../assets/images/addhome.png";
+import add from "../../assets/images/waiter.png";
 
 export default function CreateServiceModal() {
   const dispatch = useDispatch();
@@ -30,11 +30,11 @@ export default function CreateServiceModal() {
   return (
     <footer className="w-full flex justify-center">
     <button
-        className="shadow-lg p-1 h-10 w-36 flex items-center justify-center flex-row gap-1 rounded-lg items-center border-2 hover:bg-green-500  hover:text-white hover:font-bold font-semibold border-green-500"
+        className="shadow-lg p-1 h-10 flex items-center font-semibold justify-center flex-row gap-1 rounded-lg items-center border-2 hover:bg-green-500  hover:text-white hover:font-bold border-green-500"
         onClick={modalHandler}
       >
-        <img src={add} alt="" className="w-8" />
-        Agregar
+        <img src={add} alt="" className="w-8   " />
+     Agregar
       </button>
 
       <Modal show={showModal} size="md" popup={true} onClose={modalHandler}>
