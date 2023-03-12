@@ -54,6 +54,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
       };
     }
+    case action.CREATE_LIGHT_INVOICE: {
+      return {
+        ...state,
+      };
+    }
 
     default:
       return state;

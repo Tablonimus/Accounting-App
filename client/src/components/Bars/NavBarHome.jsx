@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import homeslogo from "../../assets/images/homeslogo.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserProfile } from "../../redux/actions";
 
 export default function NavBarHome() {
-  let loggedUser = false;
+  const loggedUser = useSelector((state) => state.loggedUser);
 
+  console.log(loggedUser);
   return (
     <Navbar rounded={true} class="z-30 sticky top-0 bg-gray-100 h-18 pl-5 py-2">
       <Navbar.Brand href="">
@@ -15,7 +18,7 @@ export default function NavBarHome() {
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
-        {loggedUser === true ? (
+        {loggedUser ? (
           <Dropdown
             arrowIcon={false}
             inline={true}
@@ -28,16 +31,16 @@ export default function NavBarHome() {
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
+              <span className="block text-sm">{loggedUser.titular}</span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                {loggedUser.mail}
               </span>
             </Dropdown.Header>
             <Dropdown.Item>Dashboard</Dropdown.Item>
             <Dropdown.Item>Settings</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item>Cerrar sesión</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/login">

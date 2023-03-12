@@ -28,12 +28,12 @@ export default function Login() {
     try {
       // await login(user.email, user.password);
       if (user.mail === "" || user.password === "") {
-        alert("Must fill all inputs");
+        alert("Debes completar todos los campos");
       } else {
         dispatch(login(user)).then((response) => console.log(response));
-        toast("Logging to the site");
+        toast("Ingresando al sitio");
 
-        setTimeout(() => navigate("/home"), [3000]);
+        setTimeout(() => navigate("/"), [3000]);
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ export default function Login() {
             <Label htmlFor="mail" value="Tu email" />
           </div>
           <TextInput
-            id="numero_lote"
+            id="mail"
             type="text"
             placeholder="Letra y numero... Ej: A01"
             required={true}

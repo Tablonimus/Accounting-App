@@ -13,9 +13,11 @@ export function login(payload) {
       await axios.post(`${url}/batch/login`, payload).then((response) => {
         const token = response.data.data.token;
         const id = response.data.id.id;
+        console.log("TOKEN DEL ACTION", token);
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
         setAuthToken(token);
+        
       });
       return dispatch({
         type: action.LOGIN,
@@ -47,6 +49,7 @@ export function getBatch() {
   return async function (dispatch) {
     try {
       let json = await axios.get(`${url}/batch`);
+
       dispatch({
         type: action.GET_BATCH,
         payload: json.data,
@@ -121,6 +124,21 @@ export function createInvoice(payload) {
       let json = await axios.post(`${url}/billing/newbill`, payload);
       dispatch({
         type: action.CREATE_INVOICE,
+        payload: json.data,
+      });
+      console.log("JSON", json);
+      return alert("Facturado");
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+}
+export function createLightInvoice(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post(`${url}/billingLight/newbill`, payload);
+      dispatch({
+        type: action.CREATE_LIGHT_INVOICE,
         payload: json.data,
       });
       console.log("JSON", json);
