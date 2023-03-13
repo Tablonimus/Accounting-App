@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserProfile(id));
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -48,11 +48,10 @@ function App() {
         <Route path={"/batches"} element={<Batches />} />
         <Route path={"/billing"} element={<Billing />} />
         <Route path={"/services"} element={<Services />} />
-      </Routes>
-      <Routes>
+  
         <Route path={"/"} element={<Home />} />
-        <Route path={"/bills"} element={<NeighborBills />} />
         <Route path={"/login"} element={<Login />} />
+        <Route path={"/bills"} element={<NeighborBills />} />
       </Routes>
     </BrowserRouter>
   );

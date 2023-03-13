@@ -22,7 +22,7 @@ export default function NeighborBills() {
   return (
     <div className="w-full h-screen flex flex-col bg-gray-900 justify-between">
       <NavBarHome />
-      <div className="overflow-auto h-2/3 bg-gray-100 rounded-lg shadow-lg">
+      <div className="overflow-auto  lg:h-2/3 bg-gray-100 rounded-lg shadow-lg">
         <BillsCell invoices={loggedUser.Invoices} />
       </div>
 

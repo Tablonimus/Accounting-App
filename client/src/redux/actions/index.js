@@ -5,6 +5,24 @@ import { setAuthToken } from "../../components/BrowserHistory/setAuthToken";
 
 const url = "http://localhost:3001";
 
+//logout
+export function logout() {
+  return async function (dispatch) {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
+     
+      return dispatch({
+        type: action.LOGOUT,
+  
+      });
+    } catch (error) {
+      window.location.reload(true);
+     console.log(error);
+    }
+  };
+}
+
 //----------Login----------------
 export function login(payload) {
   return async function (dispatch) {

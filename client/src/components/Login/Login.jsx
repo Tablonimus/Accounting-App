@@ -5,12 +5,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import "./login.css"
+import "./login.css";
 
 export default function Login() {
   const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  if (loggedUser) navigate("/");
 
   const [user, setUser] = useState({
     mail: "",

@@ -3,10 +3,12 @@ import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import homeslogo from "../../assets/images/homeslogo.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../../redux/actions";
+import { getUserProfile,logout } from "../../redux/actions";
 
 export default function NavBarHome() {
   const loggedUser = useSelector((state) => state.loggedUser);
+
+  
 
   console.log(loggedUser);
   return (
@@ -40,7 +42,7 @@ export default function NavBarHome() {
             <Dropdown.Item>Settings</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item>Cerrar sesión</Dropdown.Item>
+            <Dropdown.Item onClick={logout()}>Cerrar sesión</Dropdown.Item>
           </Dropdown>
         ) : (
           <Link to="/login">
