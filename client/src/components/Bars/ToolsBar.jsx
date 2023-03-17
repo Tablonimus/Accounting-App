@@ -10,7 +10,7 @@ export default function ToolsBar() {
   const url = window.location.pathname;
   
   return (
-    <div className="flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-screen sticky bottom-0 bg-gray-100 ">
+    <div className="flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-full fixed bottom-0 bg-gray-200 ">
       <Link to="/">
         {url === "/" ? (
           <button className="flex flex-col items-center justify-center m-1  ">

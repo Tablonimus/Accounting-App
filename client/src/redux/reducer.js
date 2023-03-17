@@ -3,13 +3,31 @@ import * as action from "../redux/actions/actionTypes";
 const initialState = {
   batch: [],
   service: [],
-  loggedUser: [],
+  loggedUser:null,
+  loggedAdmin:null,
   invoice: [],
   detail: {},
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case action.LOGOUT_ADMIN: {
+      return {
+        ...state,
+        loggedAdmin: {},
+      };
+    }
+    case action.LOGIN_ADMIN: {
+      return {
+        ...state,
+      };
+    }
+    case action.LOGOUT: {
+      return {
+        ...state,
+        loggedUser: {},
+      };
+    }
     case action.LOGIN: {
       return {
         ...state,
@@ -18,7 +36,14 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case action.GET_USER_PROFILE: {
       return {
         ...state,
+   
         loggedUser: payload,
+      };
+    }
+    case action.GET_ADMIN_PROFILE: {
+      return {
+        ...state,
+        loggedAdmin: payload,
       };
     }
     case action.GET_BATCH: {

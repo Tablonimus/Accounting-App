@@ -40,7 +40,7 @@ export default function CreateServiceModal() {
                 Nuevo Servicio
               </h3>
               <form
-                action="/services"
+                action="/admin/billing"
                 onSubmit={(e) => batchHandler(e)}
                 className="flex flex-col gap-2"
                 onChange={(e) => inputHandler(e)}

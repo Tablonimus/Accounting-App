@@ -12,10 +12,11 @@ import {
 
 import { useEffect } from "react";
 
-import AdminBar from "../AdminView/AdminBar";
+import AdminBar from "../../adminPages/home/AdminBar";
 
 import InvoiceCell from "./InvoiceCell";
 import BillingCell from "./BillingCell";
+import AdminNav from "../../adminPages/home/AdminNav";
 
 export default function Billing() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export default function Billing() {
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
+
 
   const [checkService, setCheckService] = useState("");
   function handleService(e) {
@@ -84,9 +86,8 @@ export default function Billing() {
       ...editConsumptionCalc,
       [e.target.id]: e.target.value - e.target.name,
     });
-  }
 
-  console.log(editConsumptionCalc);
+  }
 
   //-----------------------------------
   function setBilling() {
@@ -98,8 +99,11 @@ export default function Billing() {
       service: checkService,
       batches: isCheck,
       lightMeter: consumption,
-      calc : editConsumptionCalc
+      calc: editConsumptionCalc,
     };
+
+  
+
 
     alert("Se crearan facturas");
     if (checkService === "Luz") {
@@ -108,10 +112,10 @@ export default function Billing() {
       dispatch(createInvoice(sources));
     }
   }
-
+console.log(consumption);
   return (
     <div className="flex flex-col bg-gray-200 h-full justify-between">
-      <NavBarHome />
+      <AdminNav />
 
       <div className="flex flex-col p-3 flex flex-col gap-2">
         <div className="   p-2 flex flex-col  items-center  rounded-lg bg-gray-300 shadow-lg ">
@@ -142,12 +146,11 @@ export default function Billing() {
               </form>
             </div>
 
-            <BillingCell      />
-
             <div className="bg-gray-100 p-3 rounded-lg shadow-xl  ">
               <h3 className="border-b border-black text-xl mb-2">
                 Lotes disponibles para facturación:
               </h3>
+              {/* <BillingCell      /> */}
               <form className="overflow-y-auto overflow-x-auto h-56 ">
                 <div className="flex flex-row gap-1 items-center">
                   <input
@@ -247,9 +250,6 @@ export default function Billing() {
                   : false}
               </form>
             </div>
-
-
-
           </div>
           <button
             className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
@@ -298,7 +298,7 @@ export default function Billing() {
               </div>
             </div>
           </div>
-          <div className="overflow-auto h-5/6 bg-gray-100 rounded-lg shadow-lg">
+          <div className="overflow-y-auto h-96 bg-gray-100 rounded-lg shadow-lg">
             <InvoiceCell invoices={invoices} />
           </div>
         </div>

@@ -11,8 +11,8 @@ export default function AdminBar() {
 
   return (
     <div className="flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-screen sticky bottom-0 bg-gray-100 ">
-      <Link to="/services">
-        {url === "/services" ? (
+      <Link to="/admin/services">
+        {url === "/admin/services" ? (
           <button className="flex flex-col items-center justify-center m-1  ">
             <img src={servicio} className="w-10 rounded-full bg-gray-300 p-1" />
             <h5 className=" font-bold text-sm text-black">Servicios</h5>
@@ -25,8 +25,8 @@ export default function AdminBar() {
           </button>
         )}
       </Link>
-      <Link to="/billing">
-        {url === "/billing" ? (
+      <Link to="/admin/billing">
+        {url === "/admin/billing" ? (
           <button className="flex flex-col items-center justify-center m-1  ">
             <img src={factura} className="w-10 rounded-full bg-gray-300 p-1" />
             <h5 className=" font-bold text-sm text-black">Facturación</h5>
@@ -40,8 +40,8 @@ export default function AdminBar() {
         )}
       </Link>
 
-      <Link to="/generar-recibo">
-        {url === "/generar-recibo " ? (
+      <Link to="/admin/generar-recibo">
+        {url === "/admin/generar-recibo " ? (
           <button className="flex flex-col items-center justify-center m-1  ">
             <img src={recibo} className="w-10 rounded-full bg-gray-300 p-1" />
             <h5 className=" font-bold text-sm text-black">Recibos</h5>
@@ -54,8 +54,8 @@ export default function AdminBar() {
           </button>
         )}
       </Link>
-      <Link to="/batches">
-        {url === "/batches" ? (
+      <Link to="/admin/batches">
+        {url === "/admin/batches" ? (
           <button className="flex flex-col items-center justify-center m-1  ">
             <img src={home} className="w-10 rounded-full bg-gray-300 p-1" />
             <h5 className=" font-bold text-sm text-black">Lotes</h5>

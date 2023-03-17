@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import homeslogo from "../../assets/images/homeslogo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile, logout } from "../../redux/actions";
+import { getUserProfile, logoutAdmin } from "../../redux/actions";
 
-export default function NavBarHome() {
-
-  const loggedUser = useSelector((state) => state.loggedUser);
-
+export default function AdminNav() {
+  const navigate = useNavigate();
+  const loggedAdmin = useSelector((state) => state.loggedAdmin);
 
   return (
     <Navbar
@@ -22,44 +21,36 @@ export default function NavBarHome() {
         </span>
       </Navbar.Brand>
       <div className="flex md:order-2">
-        {loggedUser ? (
+        {loggedAdmin ? (
           <Dropdown
             arrowIcon={true}
             inline={true}
             label={
-              <div className="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center ring ring-green-300">
-                <span className="text-black text-5xl font-semibold ">
-                  {loggedUser?.titular ? loggedUser.titular[0] : false}
-                </span>
-              </div>
-              // <Avatar
-              //   alt="User settings"
-              //   img="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"
-              //   rounded={true}
-              // />
+              <Avatar
+                alt="User settings"
+                img="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"
+                rounded={true}
+              />
             }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{loggedUser.titular}</span>
               <span className="block truncate text-sm font-medium">
-                {loggedUser.mail}
+                Administrador
               </span>
+              <span className="block text-sm">{loggedAdmin.mail}</span>
             </Dropdown.Header>
-            <Dropdown.Item>Perfil</Dropdown.Item>
+            {/* <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item> */}
             <Dropdown.Divider />
-            <Dropdown.Item onClick={logout()}>Cerrar sesión</Dropdown.Item>
+            <Dropdown.Item onClick={logoutAdmin()}>Cerrar sesión</Dropdown.Item>
           </Dropdown>
         ) : (
-          <Link to="/login">
-            <button className="border-2 rounded-lg p-2 hover:bg-gray-200 font-bold">
-              {" "}
-              Iniciar Sesion
-            </button>
-          </Link>
+        "LAALALLALALA"
         )}
       </div>
 
-      <Navbar.Collapse>
+      {/* <Navbar.Collapse>
         <Navbar.Link href="/navbars" active={true}>
           Home
         </Navbar.Link>
@@ -67,7 +58,7 @@ export default function NavBarHome() {
         <Navbar.Link href="/navbars">Services</Navbar.Link>
         <Navbar.Link href="/navbars">Pricing</Navbar.Link>
         <Navbar.Link href="/navbars">Contact</Navbar.Link>
-      </Navbar.Collapse>
+      </Navbar.Collapse> */}
     </Navbar>
   );
 }

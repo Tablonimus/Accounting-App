@@ -6,7 +6,7 @@ import { getBatch, createBatch, getService } from "../../redux/actions";
 import CreateServiceModal from "./CreateServiceModal";
 import { useEffect } from "react";
 
-import AdminBar from "../AdminView/AdminBar";
+import AdminBar from "../../adminPages/home/AdminBar";
 import ServicesCell from "./ServicesCell";
 
 export default function Services() {

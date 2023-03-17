@@ -6,7 +6,7 @@ import { getBatch, createBatch } from "../../redux/actions";
 import CreateBatchModal from "./CreateBatchModal";
 import { useEffect } from "react";
 import BatchesCell from "./BatchesCell";
-import AdminBar from "../AdminView/AdminBar";
+import AdminBar from "../../adminPages/home/AdminBar";
 
 export default function Batches() {
   const dispatch = useDispatch();

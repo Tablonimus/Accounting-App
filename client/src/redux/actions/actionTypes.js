@@ -7,5 +7,8 @@ export const GET_SERVICE = "GET_SERVICE";
 export const GET_INVOICE = "GET_INVOICE";
 
 export const GET_USER_PROFILE = "GET_USER_PROFILE";
+export const GET_ADMIN_PROFILE = "GET_ADMIN_PROFILE";
 export const LOGIN = "LOGIN";
+export const LOGIN_ADMIN = "LOGIN_ADMIN";
 export const LOGOUT = "LOGOUT";
+export const LOGOUT_ADMIN = "LOGOUT_ADMIN";

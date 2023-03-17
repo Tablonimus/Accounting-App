@@ -29,12 +29,12 @@ export default function CreateServiceModal() {
 
   return (
     <footer className="w-full flex justify-center">
-    <button
+      <button
         className="shadow-lg p-1 h-10 flex items-center font-semibold justify-center flex-row gap-1 rounded-lg items-center border-2 hover:bg-green-500  hover:text-white hover:font-bold border-green-500"
         onClick={modalHandler}
       >
         <img src={add} alt="" className="w-8   " />
-     Agregar
+        Agregar
       </button>
 
       <Modal show={showModal} size="md" popup={true} onClose={modalHandler}>
@@ -45,7 +45,7 @@ export default function CreateServiceModal() {
               Nuevo Servicio
             </h3>
             <form
-              action="/services"
+              action="/admin/services"
               onSubmit={(e) => batchHandler(e)}
               className="flex flex-col gap-2"
               onChange={(e) => inputHandler(e)}

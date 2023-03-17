@@ -7,6 +7,7 @@ export default function BillsCell({ invoices }) {
     <div className="">
       <Table hoverable={true}>
         <Table.Head>
+          <Table.HeadCell>Fecha</Table.HeadCell>
           <Table.HeadCell>N°</Table.HeadCell>
           <Table.HeadCell>Lote</Table.HeadCell>
           <Table.HeadCell>Remitente</Table.HeadCell>
@@ -25,6 +26,9 @@ export default function BillsCell({ invoices }) {
                   key={invoices.id}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    {invoices.createdAt.split("T")[0].split("-").reverse().join("-")}
+                  </Table.Cell>
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                     {invoices.id}
                   </Table.Cell>
@@ -55,14 +59,7 @@ export default function BillsCell({ invoices }) {
             : false}
         </Table.Body>
       </Table>
-      {/* {invoices
-        ? invoices.map((invoice) => 
-        <h1>{invoice.detalle}</h1>
-        
-        
-        
-        )
-        : ""} */}
+
     </div>
   );
 }

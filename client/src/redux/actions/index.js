@@ -2,6 +2,7 @@ import * as action from "../actions/actionTypes";
 import axios from "axios";
 import { bindActionCreators } from "redux";
 import { setAuthToken } from "../../components/BrowserHistory/setAuthToken";
+import { useNavigate } from "react-router-dom";
 
 const url = "http://localhost:3001";
 
@@ -11,14 +12,29 @@ export function logout() {
     try {
       localStorage.removeItem("token");
       localStorage.removeItem("id");
-     
+
       return dispatch({
         type: action.LOGOUT,
-  
       });
     } catch (error) {
       window.location.reload(true);
-     console.log(error);
+      console.log(error);
+    }
+  };
+}
+//logout ADMIN
+export function logoutAdmin() {
+  return async function (dispatch) {
+    try {
+      localStorage.removeItem("tokenA");
+      localStorage.removeItem("idA");
+
+      return dispatch({
+        type: action.LOGOUT,
+      });
+    } catch (error) {
+      window.location.reload(true);
+      console.log(error);
     }
   };
 }
@@ -35,7 +51,6 @@ export function login(payload) {
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
         setAuthToken(token);
-        
       });
       return dispatch({
         type: action.LOGIN,
@@ -47,11 +62,56 @@ export function login(payload) {
     }
   };
 }
+//----------LoginADMIN----------------
+export function loginAdmin(payload) {
+  return async function (dispatch) {
+    try {
+      const pet = await axios
+        .post(`${url}/admin/login`, payload)
+        .then((response) => {
+          const token = response.data.data.token;
+          const id = response.data.id.id;
+          //         const user = response.data.user.user;
+          // console.log("USER DEL RESPONSE",user);
+          localStorage.setItem("tokenA", token);
+          localStorage.setItem("idA", id);
+
+          setAuthToken(token);
+          dispatch({
+            type: action.LOGIN_ADMIN,
+            payload,
+          });
+          return { token, id };
+        });
+      return pet;
+    } catch (error) {
+      window.location.reload(true);
+      alert("Mail o contraseña incorrectos");
+    }
+  };
+}
+
+//-----------Get ADMIN Profile-----
+export function getAdminProfile(id) {
+  return async function (dispatch) {
+    console.log("IDIDIDIDIDID", id);
+    try {
+      let json = await axios.get(`${url}/admin/${id}`);
+      return dispatch({
+        type: action.GET_ADMIN_PROFILE,
+        payload: { id: json.data.id, mail: json.data.mail },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 //-----------Get User Profile-----
 export function getUserProfile(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get(`${url}/batch/${id}`);
+   
       return dispatch({
         type: action.GET_USER_PROFILE,
         payload: json.data,
