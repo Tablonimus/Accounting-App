@@ -10,7 +10,7 @@ import AdminHome from "./adminPages/home/AdminHome";
 import NeighborBills from "./neighborPages/facturas/NeighborBills";
 import Batches from "./components/Batches/Batches";
 import Billing from "./components/Billing/Billing";
-import Services from "./components/Services/Services";
+import Services from "./adminPages/services/Services";
 import AdminLogin from "./adminPages/login/AdminLogin";
 import Login from "./neighborPages/login/Login";
 
@@ -22,48 +22,44 @@ import {
   getService,
   getUserProfile,
 } from "./redux/actions";
-
+import AdminRoutes from "./AdminRoutes";
+import Landing from "./commonPages/Landing";
 
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-     dispatch(getBatch());
-    dispatch(getService());
-     dispatch(getInvoice());
-  }, [dispatch]);
-
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
+  const tokenA = localStorage.getItem("tokenA");
+  const idA = localStorage.getItem("idA");
 
-
-  
   if (token) {
     setAuthToken(token);
   }
 
   // useEffect(() => {
   //   dispatch(getUserProfile(id));
-
+  //   dispatch(getAdminProfile(idA));
   // }, [dispatch]);
-const loggedAdmin = useSelector(state=> state.loggedAdmin)
+
   return (
     <BrowserRouter>
       <Routes>
-        {
+      
+        <Route path={"/login"} element={<Login />} />
 
-        }
-        <Route path={"/admin"} element={<AdminLogin />} />   
-          
-        <Route path={"/admin/:id"} element={<AdminHome />} />
+        <Route path={"/"} element={<Landing />} />
+
+        <Route path={"/bills"} element={<NeighborBills />} />
+
+        <Route path={"/admin/login"} element={<AdminLogin />} />
+        <Route path={"/admin"} element={<AdminHome />} />
         <Route path={"/admin/batches"} element={<Batches />} />
         <Route path={"/admin/billing"} element={<Billing />} />
         <Route path={"/admin/services"} element={<Services />} />
 
-        <Route path={"/"} element={<Home />} />
-        <Route path={"/login"} element={<Login />} />
-        <Route path={"/bills"} element={<NeighborBills />} />
       </Routes>
+      {/* {loggedAdmin === null ? false : <AdminRoutes />} */}
     </BrowserRouter>
   );
 }

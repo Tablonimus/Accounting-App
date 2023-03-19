@@ -3,11 +3,26 @@ import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
 import homeslogo from "../../assets/images/homeslogo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile, logoutAdmin } from "../../redux/actions";
+import {
+  getAdminProfile,
+  getUserProfile,
+  logoutAdmin,
+} from "../../redux/actions";
+import NavBarHome from "../../components/Bars/NavBarHome";
 
 export default function AdminNav() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loggedAdmin = useSelector((state) => state.loggedAdmin);
+  const id = localStorage.getItem("idA");
+  useEffect(() => {
+    dispatch(getAdminProfile(id));
+  }, []);
+
+  function handleLogout() {
+    dispatch(logoutAdmin());
+    navigate("/admin/login");
+  }
 
   return (
     <Navbar
@@ -37,16 +52,18 @@ export default function AdminNav() {
               <span className="block truncate text-sm font-medium">
                 Administrador
               </span>
-              <span className="block text-sm">{loggedAdmin.mail}</span>
+              <span className="block text-sm">{loggedAdmin.user}</span>
             </Dropdown.Header>
             {/* <Dropdown.Item>Dashboard</Dropdown.Item>
             <Dropdown.Item>Settings</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item> */}
             <Dropdown.Divider />
-            <Dropdown.Item onClick={logoutAdmin()}>Cerrar sesión</Dropdown.Item>
+            <Dropdown.Item onClick={e=>handleLogout(e)}>
+              Cerrar sesión
+            </Dropdown.Item>
           </Dropdown>
         ) : (
-        "LAALALLALALA"
+          "LAALALLALALA"
         )}
       </div>
 

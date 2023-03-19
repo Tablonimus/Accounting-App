@@ -1,16 +1,21 @@
 import * as action from "../redux/actions/actionTypes";
 
 const initialState = {
-  batch: [],
-  service: [],
-  loggedUser:null,
-  loggedAdmin:null,
-  invoice: [],
-  detail: {},
+  batch: null,
+  service: null,
+  loggedUser: null,
+  loggedAdmin: null,
+  invoice: null,
+  detail: null,
 };
 
 export default function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
+    case action.EDIT_SERVICE: {
+      return {
+        ...state,
+      };
+    }
     case action.LOGOUT_ADMIN: {
       return {
         ...state,
@@ -36,7 +41,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case action.GET_USER_PROFILE: {
       return {
         ...state,
-   
+
         loggedUser: payload,
       };
     }
@@ -55,7 +60,15 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case action.GET_SERVICE: {
       return {
         ...state,
-        service: payload,
+        service: payload.sort((a, b) => {
+          if (a.nombe > b.nombre) {
+            return 1;
+          }
+          if (a.nombre < b.nombre) {
+            return -1;
+          }
+          return 0;
+        }),
       };
     }
     case action.GET_INVOICE: {

@@ -1,0 +1,28 @@
+.main {
+    margin-top:10rem ;
+    -webkit-text-size-adjust: 100%;
+    --gris: #353A40;
+    --entrar-gris: #606871;
+     --recuperar-gris: #606871;
+    --registro-gris: #606871;
+    color: #555;
+    cursor: default;
+    font-size: 13px;
+    line-height: 1.28;
+    user-select: none;
+    -webkit-print-color-adjust: exact;
+    font-family: 'Open Sans',sans-serif!important;
+    outline: 1px solid #036cdb!important;
+    box-shadow: 0 0 1rem rgba(0,0,0,.6);
+    width: 100%;
+    height: calc(100vh);
+    overflow: hidden;
+    transform: skewY(-8deg);
+    transform-origin: 0;
+    background: linear-gradient(150deg,var(--gris) 25%,#424952 50%,#606a77 75%,#6f7d8e 100%);
+    display: grid;
+    grid: repeat(5,200px)/repeat(10,1fr);
+    /* position: absolute; */
+    z-index: 0;
+}
+

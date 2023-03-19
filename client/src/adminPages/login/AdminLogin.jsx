@@ -16,7 +16,7 @@ export default function AdminLogin() {
   // if (loggedAdmin) navigate("/admin");
 
   const [user, setUser] = useState({
-    mail: "",
+    user: "",
     password: "",
   });
 
@@ -30,11 +30,14 @@ export default function AdminLogin() {
     setError("");
     try {
       // await login(user.email, user.password);
-      if (user.mail === "" || user.password === "") {
+      if (
+        user.user === "" ||
+        user.password === ""
+      ) {
         alert("Debes completar todos los campos");
       } else {
-        dispatch(loginAdmin(user)).then((response) =>
-          navigate(`/admin/${response.id}`)
+        await dispatch(loginAdmin(user)).then((response) =>
+          navigate(`/admin`)
         );
       }
     } catch (error) {
@@ -53,23 +56,24 @@ export default function AdminLogin() {
         <h1>LOGIN DE ADMINISTRADORES</h1>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="mail" value="Tu email" />
+            <Label htmlFor="mail" value="Usuario" />
           </div>
           <TextInput
-            id="mail"
+            id="user"
             type="text"
-            placeholder="Letra y numero... Ej: A01"
+            placeholder="Ingrese su usuario aquí"
             required={true}
             onChange={(e) => handleChange(e)}
           />
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password" value="Your password" />
+            <Label htmlFor="password" value="Contraseña" />
           </div>
           <TextInput
             id="password"
             type="password"
+            placeholder="Ingrese su contraseña aquí"
             required={true}
             onChange={(e) => handleChange(e)}
           />

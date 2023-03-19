@@ -12,11 +12,11 @@ import {
 
 import { useEffect } from "react";
 
-import AdminBar from "../../adminPages/home/AdminBar";
 
 import InvoiceCell from "./InvoiceCell";
 import BillingCell from "./BillingCell";
-import AdminNav from "../../adminPages/home/AdminNav";
+import AdminNav from "../../adminPages/adminComponents/AdminNav";
+import AdminBar from "../../adminPages/adminComponents/AdminBar";
 
 export default function Billing() {
   const dispatch = useDispatch();
@@ -29,8 +29,7 @@ export default function Billing() {
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
-
-
+  
   const [checkService, setCheckService] = useState("");
   function handleService(e) {
     setCheckService(e.target.id);
@@ -86,7 +85,6 @@ export default function Billing() {
       ...editConsumptionCalc,
       [e.target.id]: e.target.value - e.target.name,
     });
-
   }
 
   //-----------------------------------
@@ -102,9 +100,6 @@ export default function Billing() {
       calc: editConsumptionCalc,
     };
 
-  
-
-
     alert("Se crearan facturas");
     if (checkService === "Luz") {
       dispatch(createLightInvoice(lightSources));
@@ -112,7 +107,7 @@ export default function Billing() {
       dispatch(createInvoice(sources));
     }
   }
-console.log(consumption);
+  console.log(consumption);
   return (
     <div className="flex flex-col bg-gray-200 h-full justify-between">
       <AdminNav />
@@ -151,112 +146,120 @@ console.log(consumption);
                 Lotes disponibles para facturación:
               </h3>
               {/* <BillingCell      /> */}
-              <form className="overflow-y-auto overflow-x-auto h-56 ">
-                <div className="flex flex-row gap-1 items-center">
-                  <input
-                    type="checkbox"
-                    name="selectAll"
-                    id="selectAll"
-                    onChange={handleSelectAll}
-                    checked={isCheckAll}
-                  />
-                  <label htmlFor="selectAll">Seleccionar todos</label>
+              <form action="/admin/billing" className="">
+                <div className="overflow-y-auto overflow-x-auto h-56 "> 
+                  <div className="flex flex-row gap-1 items-center">
+                    <input
+                      type="checkbox"
+                      name="selectAll"
+                      id="selectAll"
+                      onChange={handleSelectAll}
+                      checked={isCheckAll}
+                    />
+                    <label htmlFor="selectAll">Seleccionar todos</label>
+                  </div>
+                  {filter.length > 0 && checkService !== "Luz"
+                    ? filter.map((batch) => (
+                        <div key={batch.id}>
+                          <div className="flex flex-row gap-1 items-center border-b border-gray-300">
+                            <input
+                              type="checkbox"
+                              id={batch.numero_lote}
+                              name={batch.titular}
+                              onChange={handleClick}
+                              checked={isCheck.includes(batch.numero_lote)}
+                            />
+                            <label htmlFor={batch.numero_lote}>
+                              {batch.numero_lote} - {batch.titular}
+                            </label>
+                          </div>
+                        </div>
+                      ))
+                    : filter.length > 0 && checkService === "Luz"
+                    ? filter.map((batch) => (
+                        <div key={batch.id}>
+                          <div className="flex flex-row gap-1 items-center border-b border-gray-300">
+                            <table className="border">
+                              <thead className="border">
+                                <th className="border">Seleccionar</th>
+
+                                <th className="border">N° lote y titular</th>
+
+                                <th className="border">Medición anterior</th>
+                                <th className="border">Medición del mes</th>
+                                <th className="border">Consumo calculado</th>
+                              </thead>
+                              <tbody>
+                                <td className="border">
+                                  <input
+                                    type="checkbox"
+                                    id={batch.numero_lote}
+                                    name={
+                                      batch.medidor_luz[
+                                        batch.medidor_luz.length - 1
+                                      ]
+                                    }
+                                    onChange={handleClick}
+                                    checked={isCheck.includes(
+                                      batch.numero_lote
+                                    )}
+                                  />
+                                </td>
+                                <td className="border">
+                                  <label htmlFor={batch.numero_lote}>
+                                    {batch.numero_lote} - {batch.titular}
+                                  </label>
+                                </td>
+                                <td className="border">
+                                  <label htmlFor={batch.numero_lote}>
+                                    {
+                                      batch.medidor_luz[
+                                        batch.medidor_luz.length - 1
+                                      ]
+                                    }
+                                  </label>
+                                </td>
+                                <td className="border">
+                                  <input
+                                    key={batch.id}
+                                    type="text"
+                                    name={
+                                      batch.medidor_luz[
+                                        batch?.medidor_luz.length - 1
+                                      ]
+                                    }
+                                    id={batch.numero_lote}
+                                    className="text-sm w-18  h-5"
+                                    onChange={(e) => handleLightInvocie(e)}
+                                  />
+                                </td>
+                                <td className="border">
+                                  <label htmlFor={batch.numero_lote}>
+                                    {
+                                      Object.entries(editConsumptionCalc)
+                                        .filter(
+                                          (ele) => ele[0] === batch.numero_lote
+                                        )
+                                        .flat()[1]
+                                    }
+                                  </label>
+                                </td>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      ))
+                    : false}
                 </div>
-                {filter.length > 0 && checkService !== "Luz"
-                  ? filter.map((batch) => (
-                      <div key={batch.id}>
-                        <div className="flex flex-row gap-1 items-center border-b border-gray-300">
-                          <input
-                            type="checkbox"
-                            id={batch.numero_lote}
-                            name={batch.titular}
-                            onChange={handleClick}
-                            checked={isCheck.includes(batch.numero_lote)}
-                          />
-                          <label htmlFor={batch.numero_lote}>
-                            {batch.numero_lote} - {batch.titular}
-                          </label>
-                        </div>
-                      </div>
-                    ))
-                  : filter.length > 0 && checkService === "Luz"
-                  ? filter.map((batch) => (
-                      <div key={batch.id}>
-                        <div className="flex flex-row gap-1 items-center border-b border-gray-300">
-                          <table className="border">
-                            <thead className="border">
-                              <th className="border">Seleccionar</th>
-
-                              <th className="border">N° lote y titular</th>
-
-                              <th className="border">Medición anterior</th>
-                              <th className="border">Medición del mes</th>
-                              <th className="border">Consumo calculado</th>
-                            </thead>
-                            <tbody>
-                              <td className="border">
-                                <input
-                                  type="checkbox"
-                                  id={batch.numero_lote}
-                                  name={
-                                    batch.medidor_luz[
-                                      batch.medidor_luz.length - 1
-                                    ]
-                                  }
-                                  onChange={handleClick}
-                                  checked={isCheck.includes(batch.numero_lote)}
-                                />
-                              </td>
-                              <td className="border">
-                                <label htmlFor={batch.numero_lote}>
-                                  {batch.numero_lote} - {batch.titular}
-                                </label>
-                              </td>
-                              <td className="border">
-                                <label htmlFor={batch.numero_lote}>
-                                  {batch.medidor_luz}
-                                </label>
-                              </td>
-                              <td className="border">
-                                <input
-                                  key={batch.id}
-                                  type="text"
-                                  name={
-                                    batch.medidor_luz[
-                                      batch?.medidor_luz.length - 1
-                                    ]
-                                  }
-                                  id={batch.numero_lote}
-                                  className="text-sm w-18  h-5"
-                                  onChange={(e) => handleLightInvocie(e)}
-                                />
-                              </td>
-                              <td className="border">
-                                <label htmlFor={batch.numero_lote}>
-                                  {
-                                    Object.entries(editConsumptionCalc)
-                                      .filter(
-                                        (ele) => ele[0] === batch.numero_lote
-                                      )
-                                      .flat()[1]
-                                  }
-                                </label>
-                              </td>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    ))
-                  : false}
+              <button
+                className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
+                onClick={setBilling}
+              >
+                Facturar
+              </button>
               </form>
             </div>
           </div>
-          <button
-            className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
-            onClick={setBilling}
-          >
-            Facturar
-          </button>
         </div>
 
         <div className="col-span-3 p-2 flex flex-col  items-center  rounded-lg bg-gray-300 shadow-lg ">

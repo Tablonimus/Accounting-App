@@ -28,7 +28,7 @@ export function logoutAdmin() {
     try {
       localStorage.removeItem("tokenA");
       localStorage.removeItem("idA");
-
+     
       return dispatch({
         type: action.LOGOUT,
       });
@@ -47,7 +47,7 @@ export function login(payload) {
       await axios.post(`${url}/batch/login`, payload).then((response) => {
         const token = response.data.data.token;
         const id = response.data.id.id;
-        console.log("TOKEN DEL ACTION", token);
+
         localStorage.setItem("token", token);
         localStorage.setItem("id", id);
         setAuthToken(token);
@@ -94,12 +94,11 @@ export function loginAdmin(payload) {
 //-----------Get ADMIN Profile-----
 export function getAdminProfile(id) {
   return async function (dispatch) {
-    console.log("IDIDIDIDIDID", id);
     try {
       let json = await axios.get(`${url}/admin/${id}`);
       return dispatch({
         type: action.GET_ADMIN_PROFILE,
-        payload: { id: json.data.id, mail: json.data.mail },
+        payload: { id: json.data.id, user: json.data.user },
       });
     } catch (error) {
       console.log(error);
@@ -111,7 +110,7 @@ export function getUserProfile(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get(`${url}/batch/${id}`);
-   
+
       return dispatch({
         type: action.GET_USER_PROFILE,
         payload: json.data,
@@ -173,7 +172,7 @@ export function createBatch(payload) {
         type: action.CREATE_BATCH,
         payload: json.data,
       });
-      console.log("JSOMN", json);
+
       return alert("Lote creado correctamente");
     } catch (error) {
       return console.log(error);
@@ -188,7 +187,7 @@ export function createService(payload) {
         type: action.CREATE_SERVICE,
         payload: json.data,
       });
-      console.log("JSOMN", json);
+
       return alert("Servicio creado correctamente");
     } catch (error) {
       return console.log(error);
@@ -204,7 +203,7 @@ export function createInvoice(payload) {
         type: action.CREATE_INVOICE,
         payload: json.data,
       });
-      console.log("JSON", json);
+
       return alert("Facturado");
     } catch (error) {
       return console.log(error);
@@ -226,6 +225,25 @@ export function createLightInvoice(payload) {
     }
   };
 }
+
+//-------PATCH----------------
+
+export function patchService(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.patch(`${url}/service`, payload);
+      dispatch({
+        type: action.EDIT_SERVICE,
+        payload: json.data,
+      });
+
+      return alert("Servicios editados exitosamente");
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+}
+
 //------------GET DETAIL---------
 // export function getDetail(title) {
 //   return async (dispatch) => {

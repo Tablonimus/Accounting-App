@@ -1,4 +1,4 @@
-import { Avatar } from "flowbite-react";
+
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import recibo from "../../assets/images/recibos2.png";
