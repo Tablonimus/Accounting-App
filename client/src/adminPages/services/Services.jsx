@@ -23,7 +23,7 @@ export default function Services() {
   // }, [dispatch]);
 
   return (
-    <div className="bg-gray-200 flex flex-col justify-between h-screen">
+    <div className="main flex flex-col justify-between h-screen">
       <AdminNav />
 
       <div className="  p-3 flex flex-col gap-2  overflow-x-auto overflow-y-auto ">

@@ -48,8 +48,9 @@ function App() {
       
         <Route path={"/login"} element={<Login />} />
 
-        <Route path={"/"} element={<Landing />} />
 
+        <Route path={"/"} element={<Landing />} />
+        <Route path={"/ID"} element={<Home />} />
         <Route path={"/bills"} element={<NeighborBills />} />
 
         <Route path={"/admin/login"} element={<AdminLogin />} />

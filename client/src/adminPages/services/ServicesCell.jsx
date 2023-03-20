@@ -68,7 +68,7 @@ export default function ServicesCell({ services }) {
         </Table.Head>
         {editState === false ? (
           <Table.Body className="divide-y">
-            {services.length > 0
+            {services?.length > 0
               ? services.map((service) => (
                   <Table.Row
                     key={service.id}

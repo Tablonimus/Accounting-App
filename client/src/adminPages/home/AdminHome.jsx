@@ -35,12 +35,12 @@ export default function AdminHome() {
   const [deudaTotal, setDeudaTotal] = useState(0);
 
   const noPagadas = invoices
-    .filter((i) => i.pagado === false)
+    ?.filter((i) => i.pagado === false)
     .reduce((a, b) => a + parseFloat(b.total), 0);
   console.log(noPagadas);
 
   return (
-    <div className="w-full h-screen flex flex-col bg-gray-900">
+    <div className="w-full h-screen flex flex-col main">
       {loggedAdmin ? (
         <>
           <AdminNav />
