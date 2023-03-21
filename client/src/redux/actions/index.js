@@ -13,7 +13,7 @@ export function logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("id");
 
-      return dispatch({
+      dispatch({
         type: action.LOGOUT,
       });
     } catch (error) {
@@ -28,7 +28,7 @@ export function logoutAdmin() {
     try {
       localStorage.removeItem("tokenA");
       localStorage.removeItem("idA");
-     
+
       return dispatch({
         type: action.LOGOUT,
       });
@@ -43,19 +43,23 @@ export function logoutAdmin() {
 export function login(payload) {
   return async function (dispatch) {
     try {
-      console.log("payload", payload);
-      await axios.post(`${url}/batch/login`, payload).then((response) => {
-        const token = response.data.data.token;
-        const id = response.data.id.id;
+      let id = await axios
+        .post(`${url}/batch/login`, payload)
+        .then((response) => {
+          const token = response.data.data.token;
+          const id = response.data.id.id;
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("id", id);
-        setAuthToken(token);
-      });
-      return dispatch({
+          localStorage.setItem("token", token);
+          localStorage.setItem("id", id);
+          setAuthToken(token);
+          return id;
+        });
+      dispatch({
         type: action.LOGIN,
         payload,
       });
+
+      return id;
     } catch (error) {
       window.location.reload(true);
       alert("Mail o contraseña incorrectos");
@@ -66,24 +70,22 @@ export function login(payload) {
 export function loginAdmin(payload) {
   return async function (dispatch) {
     try {
-      const pet = await axios
+      const adm = await axios
         .post(`${url}/admin/login`, payload)
         .then((response) => {
           const token = response.data.data.token;
           const id = response.data.id.id;
-          //         const user = response.data.user.user;
-          // console.log("USER DEL RESPONSE",user);
+
           localStorage.setItem("tokenA", token);
           localStorage.setItem("idA", id);
-
           setAuthToken(token);
-          dispatch({
-            type: action.LOGIN_ADMIN,
-            payload,
-          });
           return { token, id };
         });
-      return pet;
+      dispatch({
+        type: action.LOGIN_ADMIN,
+        payload,
+      });
+      return adm;
     } catch (error) {
       window.location.reload(true);
       alert("Mail o contraseña incorrectos");

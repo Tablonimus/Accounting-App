@@ -1,62 +1,49 @@
 import React, { useEffect } from "react";
 import { Navbar, Dropdown, Avatar, Button } from "flowbite-react";
-import homeslogo from "../../assets/images/homeslogo.png";
-import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile, logout } from "../../redux/actions";
 
 export default function NavBarHome() {
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const loggedUser = useSelector((state) => state.loggedUser);
-
-
+  const avatar = loggedUser?.titular ? loggedUser.titular[0] : false;
+  async function handleLogout(e) {
+    e.preventDefault();
+    dispatch(logout()).then(navigate("/login"));
+  }
   return (
     <Navbar
       rounded={true}
-      className="z-30 sticky top-0 bg-gray-100 h-18 w-full pl-5 py-2"
+      class="z-30 sticky top-0 bg-gray-100 h-18 w-full pl-5 py-2"
     >
       <Navbar.Brand href="">
-        <img src={homeslogo} className="mr-3 h-6 sm:h-9" alt="" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          B°Lugar Escondido
-        </span>
+        <img src={logo} className="mr-3 h-16" alt="" />
       </Navbar.Brand>
       <div className="flex md:order-2">
-        {loggedUser ? (
-          <Dropdown
-            arrowIcon={true}
-            inline={true}
-            label={
-              <div className="bg-gray-200 w-16 h-16 rounded-full flex items-center justify-center ring ring-green-300">
-                <span className="text-black text-5xl font-semibold ">
-                  {loggedUser?.titular ? loggedUser.titular[0] : false}
-                </span>
-              </div>
-              // <Avatar
-              //   alt="User settings"
-              //   img="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/800px-User_icon_2.svg.png"
-              //   rounded={true}
-              // />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">{loggedUser.titular}</span>
-              <span className="block truncate text-sm font-medium">
-                {loggedUser.mail}
-              </span>
-            </Dropdown.Header>
-            <Dropdown.Item>Perfil</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Item onClick={logout()}>Cerrar sesión</Dropdown.Item>
-          </Dropdown>
-        ) : (
-          <Link to="/login">
-            <button className="border-2 rounded-lg p-2 hover:bg-gray-200 font-bold">
-              {" "}
-              Iniciar Sesion
-            </button>
-          </Link>
-        )}
+        <Dropdown
+          arrowIcon={true}
+          inline={true}
+          label={
+            <div className="bg-cyan-300 w-10 h-10 rounded-full flex items-center justify-center ring ring-green-300">
+              <span className="text-black text-2xl font-bold ">{avatar}</span>
+            </div>
+          }
+        >
+          <Dropdown.Header>
+            <span className="block text-sm">{loggedUser?.titular}</span>
+            <span className="block truncate text-sm font-medium">
+              {loggedUser?.mail}
+            </span>
+          </Dropdown.Header>
+          <Dropdown.Item>Perfil</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={(e) => handleLogout(e)}>
+            Cerrar sesión
+          </Dropdown.Item>
+        </Dropdown>
       </div>
 
       <Navbar.Collapse>

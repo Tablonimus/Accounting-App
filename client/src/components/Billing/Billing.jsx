@@ -1,20 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import NavBarHome from "../Bars/NavBarHome";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getBatch,
-  getService,
-  createInvoice,
-  getInvoice,
-  createLightInvoice,
-} from "../../redux/actions";
-
+import { createInvoice, createLightInvoice } from "../../redux/actions";
 import { useEffect } from "react";
-
-
 import InvoiceCell from "./InvoiceCell";
-import BillingCell from "./BillingCell";
 import AdminNav from "../../adminPages/adminComponents/AdminNav";
 import AdminBar from "../../adminPages/adminComponents/AdminBar";
 
@@ -29,7 +18,7 @@ export default function Billing() {
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [list, setList] = useState([]);
-  
+
   const [checkService, setCheckService] = useState("");
   function handleService(e) {
     setCheckService(e.target.id);
@@ -37,7 +26,7 @@ export default function Billing() {
 
   let filter = [];
 
-  for (let i = 0; i < batches.length; i++) {
+  for (let i = 0; i < batches?.length; i++) {
     if (checkService === "Luz" && batches[i].luz !== false)
       filter.push(batches[i]);
     if (checkService === "Internet" && batches[i].internet !== false)
@@ -121,8 +110,8 @@ export default function Billing() {
                 Servicio a facturar:
               </h3>
               <form>
-                {services.length > 0
-                  ? services.map((service) => (
+                {services?.length > 0
+                  ? services?.map((service) => (
                       <div key={service.id}>
                         <div className="flex flex-row gap-1 items-center">
                           <input
@@ -147,7 +136,7 @@ export default function Billing() {
               </h3>
               {/* <BillingCell      /> */}
               <form action="/admin/billing" className="">
-                <div className="overflow-y-auto overflow-x-auto h-56 "> 
+                <div className="overflow-y-auto overflow-x-auto h-56 ">
                   <div className="flex flex-row gap-1 items-center">
                     <input
                       type="checkbox"
@@ -158,8 +147,8 @@ export default function Billing() {
                     />
                     <label htmlFor="selectAll">Seleccionar todos</label>
                   </div>
-                  {filter.length > 0 && checkService !== "Luz"
-                    ? filter.map((batch) => (
+                  {filter?.length > 0 && checkService !== "Luz"
+                    ? filter?.map((batch) => (
                         <div key={batch.id}>
                           <div className="flex flex-row gap-1 items-center border-b border-gray-300">
                             <input
@@ -175,7 +164,7 @@ export default function Billing() {
                           </div>
                         </div>
                       ))
-                    : filter.length > 0 && checkService === "Luz"
+                    : filter?.length > 0 && checkService === "Luz"
                     ? filter.map((batch) => (
                         <div key={batch.id}>
                           <div className="flex flex-row gap-1 items-center border-b border-gray-300">
@@ -251,12 +240,12 @@ export default function Billing() {
                       ))
                     : false}
                 </div>
-              <button
-                className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
-                onClick={setBilling}
-              >
-                Facturar
-              </button>
+                <button
+                  className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
+                  onClick={setBilling}
+                >
+                  Facturar
+                </button>
               </form>
             </div>
           </div>
@@ -268,10 +257,10 @@ export default function Billing() {
             <h2 className="m-2 font-semibold">BUSCAR FACTURA</h2>
             <div>
               <div className="flex flex-row items-center justify-center gap-2">
-                <div class="relative ">
-                  <div class="flex absolute inset-y-0 right-0 items-center pl-3 pt-2 pointer-events-none">
+                <div className="relative ">
+                  <div className="flex absolute inset-y-0 right-0 items-center pl-3 pt-2 pointer-events-none">
                     <svg
-                      class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                      className="w-5 h-5 text-gray-500 dark:text-gray-400"
                       aria-hidden="true"
                       fill="currentColor"
                       viewBox="0 0 20 20"
@@ -288,7 +277,7 @@ export default function Billing() {
                     // onChange={(e) => handleInputChange(e)}
                     type="text"
                     id="input-group-search"
-                    class="block p-2 mt-2 pl-10 w-40 lg:w-56 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+                    className="block p-2 mt-2 pl-10 w-40 lg:w-56 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
                     placeholder="Buscar factura..."
                   />
                 </div>

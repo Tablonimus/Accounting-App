@@ -8,7 +8,6 @@ import {
   getUserProfile,
   logoutAdmin,
 } from "../../redux/actions";
-import NavBarHome from "../../components/Bars/NavBarHome";
 
 export default function AdminNav() {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ export default function AdminNav() {
 
   function handleLogout() {
     dispatch(logoutAdmin());
-    navigate("/admin/login");
+    navigate("/adminlogin");
   }
 
   return (

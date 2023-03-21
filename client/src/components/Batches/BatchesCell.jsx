@@ -19,7 +19,7 @@ export default function BatchesCell({ batches }) {
         </Table.Head>
 
         <Table.Body class="divide-y ">
-            {batches.length > 0
+            {batches?.length > 0
               ? batches.map((batch) => (
                   <Table.Row
                     key={batch.id}

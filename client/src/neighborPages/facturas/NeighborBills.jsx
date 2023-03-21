@@ -8,7 +8,7 @@ import { getUserProfile } from "../../redux/actions";
 
 export default function NeighborBills() {
   const dispatch = useDispatch();
-  const id = localStorage.getItem("id");
+  
 
   //   useEffect(() => {
   //     dispatch(getUserProfile(id));
@@ -23,7 +23,7 @@ export default function NeighborBills() {
     <div className="w-full h-screen flex flex-col bg-gray-900 justify-between">
       <NavBarHome />
       <div className="overflow-auto  lg:h-2/3 bg-gray-100 rounded-lg shadow-lg">
-        <BillsCell invoices={loggedUser.Invoices} />
+        <BillsCell invoices={loggedUser?.Invoices} />
       </div>
 
       <ToolsBar />

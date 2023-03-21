@@ -12,7 +12,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  if (loggedUser) navigate("/");
+ 
 
   const [user, setUser] = useState({
     mail: "",
@@ -32,10 +32,10 @@ export default function Login() {
       if (user.mail === "" || user.password === "") {
         alert("Debes completar todos los campos");
       } else {
-        dispatch(login(user)).then((response) => console.log(response));
-        toast("Ingresando al sitio");
+        dispatch(login(user)).then((id) =>navigate(`/${id}`));
+     
 
-        setTimeout(() => navigate("/"), [3000]);
+     
       }
     } catch (error) {
       console.log(error);
