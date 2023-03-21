@@ -20,7 +20,7 @@ export default function Home() {
   // }, []);
 
   return (
-    <div className=" flex flex-col justify-between bg-gray-900">
+    <div className=" flex flex-col justify-between h-screen bg-gray-900">
       <NavBarHome />
 
     

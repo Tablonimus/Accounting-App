@@ -17,7 +17,7 @@ export default function NavBarHome() {
   return (
     <Navbar
       rounded={true}
-      class="z-30 sticky top-0 bg-gray-100 h-18 w-full pl-5 py-2"
+class="bg-white py-2 px-2"
     >
       <Navbar.Brand href="">
         <img src={logo} className="mr-3 h-16" alt="" />
@@ -46,7 +46,7 @@ export default function NavBarHome() {
         </Dropdown>
       </div>
 
-      <Navbar.Collapse>
+     {/*  <Navbar.Collapse>
         <Navbar.Link href="/navbars" active={true}>
           Home
         </Navbar.Link>
@@ -54,7 +54,7 @@ export default function NavBarHome() {
         <Navbar.Link href="/navbars">Services</Navbar.Link>
         <Navbar.Link href="/navbars">Pricing</Navbar.Link>
         <Navbar.Link href="/navbars">Contact</Navbar.Link>
-      </Navbar.Collapse>
+      </Navbar.Collapse> */}
     </Navbar>
   );
 }
