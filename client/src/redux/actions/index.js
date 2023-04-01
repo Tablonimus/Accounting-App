@@ -112,11 +112,11 @@ export function getUserProfile(id) {
   return async function (dispatch) {
     try {
       let json = await axios.get(`${url}/batch/${id}`);
-
-      return dispatch({
+      dispatch({
         type: action.GET_USER_PROFILE,
         payload: json.data,
       });
+      return id;
     } catch (error) {
       console.log(error);
     }
@@ -246,14 +246,20 @@ export function patchService(payload) {
   };
 }
 
-//------------GET DETAIL---------
-// export function getDetail(title) {
-//   return async (dispatch) => {
-//     return await axios
-//       .get(`https://bounty-hunter-newapp.herokuapp.com/criminal/${title}`)
-//       .then((json) =>
-//         dispatch({ type: action.DETAIL_CRIMINAL, payload: json.data })
-//       )
-//       .catch((error) => console.log(error));
-//   };
-// }
+
+export function patchInvoice(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.patch(`${url}/billing`, payload);
+      dispatch({
+        type: action.EDIT_SERVICE,
+        payload: json.data,
+      });
+
+      return alert("Servicios editados exitosamente");
+    } catch (error) {
+      return console.log(error);
+    }
+  };
+}
+

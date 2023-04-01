@@ -27,7 +27,7 @@ import AdminNav from "./adminPages/adminComponents/AdminNav";
 import PrivateRoutes from "./neighborPages/PrivateRoutes";
 import PrivateAdmin from "./adminPages/PrivateAdmin";
 import Batches from "./components/Batches/Batches";
-import Billing from "./components/Billing/Billing";
+import Billing from "./adminPages/billing/Billing";
 import Services from "./adminPages/services/Services";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserProfile(id));
-    dispatch(getAdminProfile(idA));
+    //dispatch(getAdminProfile(idA));
   }, [dispatch]);
 
   return (

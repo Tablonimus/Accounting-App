@@ -17,7 +17,7 @@ export default function NeighborServices() {
     <div className="main h-screen w-screen flex flex-col items-center justify-between">
       <NavBarHome />
 
-      <div className="flex flex-col  items-cen justify-around items-ce w-11/12 lg:w-1/3  gap-2 ">
+      <div className="flex flex-col justify-around w-11/12 lg:w-1/3 gap-2 ">
         {services
           ? services
               .filter((service) => service.nombre !== "Gastos Extraordinarios")
@@ -28,7 +28,7 @@ export default function NeighborServices() {
                       {service.nombre}
                     </h3>
                   </div>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col p-2">
                     <section>
                       Precio x Fracción: <span>${service.precio_fraccion}</span>
                     </section>

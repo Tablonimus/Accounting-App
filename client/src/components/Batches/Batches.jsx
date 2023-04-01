@@ -1,13 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import NavBarHome from "../Bars/NavBarHome";
 import { useSelector, useDispatch } from "react-redux";
 import { getBatch, createBatch } from "../../redux/actions";
 import CreateBatchModal from "./CreateBatchModal";
 import { useEffect } from "react";
 import BatchesCell from "./BatchesCell";
 import AdminBar from "../../adminPages/adminComponents/AdminBar";
-
+import AdminNav from "../../adminPages/adminComponents/AdminNav";
 
 export default function Batches() {
   const dispatch = useDispatch();
@@ -17,13 +15,11 @@ export default function Batches() {
 
   const batches = useSelector((state) => state.batch);
 
-
-
   return (
     <div className="flex flex-col justify-between h-screen">
-      <NavBarHome />
+      <AdminNav />
       <div className="lg:grid lg:grid-cols-6 p-3 flex flex-col gap-2 ">
-      <div className="flex flex-col">
+        <div className="flex flex-col">
           <div class="relative mb-5">
             <div class="flex absolute inset-y-0 right-0 items-center pl-3 pt-2 pointer-events-none">
               <svg

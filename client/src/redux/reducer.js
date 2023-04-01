@@ -19,7 +19,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case action.LOGOUT_ADMIN: {
       return {
         ...state,
-        loggedAdmin: {},
+        loggedAdmin: null,
       };
     }
     case action.LOGIN_ADMIN: {
@@ -30,7 +30,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case action.LOGOUT: {
       return {
         ...state,
-        loggedUser: {},
+        loggedUser: null,
       };
     }
     case action.LOGIN: {

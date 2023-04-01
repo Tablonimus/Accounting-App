@@ -9,16 +9,13 @@ export default function NavBarHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedUser = useSelector((state) => state.loggedUser);
-  const avatar = loggedUser?.titular ? loggedUser.titular[0] : false;
+  const avatar = loggedUser?.numero_lote ? loggedUser.numero_lote : "?";
   async function handleLogout(e) {
     e.preventDefault();
     dispatch(logout()).then(navigate("/login"));
   }
   return (
-    <Navbar
-      rounded={true}
-class="bg-white py-2 px-2"
-    >
+    <Navbar rounded={true} class="bg-white bg-opacity-40 py-2 px-2 w-screen">
       <Navbar.Brand href="">
         <img src={logo} className="mr-3 h-16" alt="" />
       </Navbar.Brand>
@@ -27,13 +24,14 @@ class="bg-white py-2 px-2"
           arrowIcon={true}
           inline={true}
           label={
-            <div className="bg-cyan-300 w-10 h-10 rounded-full flex items-center justify-center ring ring-green-300">
-              <span className="text-black text-2xl font-bold ">{avatar}</span>
+            <div className="bg-green-300 w-12 h-12 rounded-full flex items-center justify-center ring ring-slate-300">
+              <span className="text-white text-xl font-bold ">{avatar}</span>
             </div>
           }
         >
           <Dropdown.Header>
             <span className="block text-sm">{loggedUser?.titular}</span>
+            <span className="block text-sm">{loggedUser?.numero_lote}</span>
             <span className="block truncate text-sm font-medium">
               {loggedUser?.mail}
             </span>
@@ -46,7 +44,7 @@ class="bg-white py-2 px-2"
         </Dropdown>
       </div>
 
-     {/*  <Navbar.Collapse>
+      {/*  <Navbar.Collapse>
         <Navbar.Link href="/navbars" active={true}>
           Home
         </Navbar.Link>

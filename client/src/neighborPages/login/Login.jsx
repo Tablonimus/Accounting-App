@@ -1,41 +1,34 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../redux/actions";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { getUserProfile, login } from "../../redux/actions";
+import { useDispatch } from "react-redux";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import "./login.css";
 
 export default function Login() {
-  const loggedUser = useSelector((state) => state.loggedUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
- 
-
   const [user, setUser] = useState({
-    mail: "",
+    numero_lote: "",
     password: "",
   });
-
   const [error, setError] = useState();
 
   function handleChange({ target: { id, value } }) {
     setUser({ ...user, [id]: value });
   }
   async function handleSubmit(e) {
-    e.preventDefault();
     setError("");
     try {
-      // await login(user.email, user.password);
-      if (user.mail === "" || user.password === "") {
+      // await login(user.enumero_lote, user.password);
+      if (user.numero_lote === "" || user.password === "") {
         alert("Debes completar todos los campos");
       } else {
-        dispatch(login(user)).then((id) =>navigate(`/${id}`));
-     
-
-     
+        
+        await dispatch(login(user))
+          .then((id) => dispatch(getUserProfile(id)))
+          .then((id) => navigate(`/${id}`));
       }
     } catch (error) {
       console.log(error);
@@ -52,10 +45,10 @@ export default function Login() {
       >
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="mail" value="Tu email" />
+            <Label htmlFor="numero_lote" value="Tu enumero_lote" />
           </div>
           <TextInput
-            id="mail"
+            id="numero_lote"
             type="text"
             placeholder="Letra y numero... Ej: A01"
             required={true}
@@ -73,11 +66,10 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="remember" />
-          <Label htmlFor="remember">Remember me</Label>
-        </div>
-        <Button type="submit">Submit</Button>
+        <div className="flex items-center gap-2"></div>
+        <Button /* type="submit" */ onClick={(e) => handleSubmit(e)}>
+          Ingresar
+        </Button>
       </form>
     </div>
   );

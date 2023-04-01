@@ -13,7 +13,7 @@ import {
 import AdminNav from "../adminComponents/AdminNav";
 import Login from "../../neighborPages/login/Login";
 import Batches from "../../components/Batches/Batches";
-import Billing from "../../components/Billing/Billing";
+import Billing from "../billing/Billing";
 import Services from "../services/Services";
 
 export default function AdminHome() {
@@ -44,21 +44,20 @@ export default function AdminHome() {
 
   return (
     <div className="w-full h-screen flex flex-col main">
-    {/*   {loggedAdmin ? ( */}
-        <>
-          <AdminNav />
-{/* 
+      {/*   {loggedAdmin ? ( */}
+      <>
+        <AdminNav />
+        {/* 
           <Route path={"/admin/batches"} element={<Batches />} />
           <Route path={"/admin/billing"} element={<Billing />} />
           <Route path={"/admin/services"} element={<Services />} /> */}
 
+        <div className="fixed bottom-0">
+          <AdminBar />
+        </div>
+      </>
 
-          <div className="fixed bottom-0">
-            <AdminBar />
-          </div>
-        </>
-
-{/*       ) : (
+      {/*       ) : (
         <div className="bg-gray-100 p-2   flex flex-col justify-center items-center text-center font-bold ">
           <h1>"Permiso denegado. Debes iniciar sesión para ingresar"</h1>
           <a href="/admin/login" className="border-b-2 border-black">

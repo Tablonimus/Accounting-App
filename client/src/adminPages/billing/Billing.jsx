@@ -1,14 +1,27 @@
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { createInvoice, createLightInvoice } from "../../redux/actions";
+import {
+  createInvoice,
+  createLightInvoice,
+  getBatch,
+  getInvoice,
+  getService,
+} from "../../redux/actions";
 import { useEffect } from "react";
 import InvoiceCell from "./InvoiceCell";
-import AdminNav from "../../adminPages/adminComponents/AdminNav";
-import AdminBar from "../../adminPages/adminComponents/AdminBar";
+import AdminNav from "../adminComponents/AdminNav";
+import AdminBar from "../adminComponents/AdminBar";
+import SearchBill from "./SearchBill";
 
 export default function Billing() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getInvoice());
+    dispatch(getBatch());
+    dispatch(getService());
+  }, [dispatch]);
 
   const batches = useSelector((state) => state.batch);
   const services = useSelector((state) => state.service);
@@ -96,14 +109,16 @@ export default function Billing() {
       dispatch(createInvoice(sources));
     }
   }
-  console.log(consumption);
+
+  console.log();
   return (
-    <div className="flex flex-col bg-gray-200 h-full justify-between">
+    <div className="flex flex-col bg-gray-200 h-full justify-between main">
       <AdminNav />
 
-      <div className="flex flex-col p-3 flex flex-col gap-2">
-        <div className="   p-2 flex flex-col  items-center  rounded-lg bg-gray-300 shadow-lg ">
-          <h2 className="m-2 font-semibold">FACTURACION EN CADENA</h2>
+      <div className="flex flex-col p-3 flex flex-col gap-3">
+        <SearchBill invoices={invoices} />
+        <div className="   p-3 flex flex-col  items-center  rounded-lg bg-gray-300  bg-opacity-50 shadow-lg ">
+          <h2 className="m-2 font-semibold text-2xl">FACTURACION EN CADENA</h2>
           <div className="flex flex-col  lg:w-11/12 gap-4">
             <div className="bg-gray-100 p-3 rounded-lg shadow-xl ">
               <h3 className="border-b border-black text-xl mb-2">
@@ -170,69 +185,72 @@ export default function Billing() {
                           <div className="flex flex-row gap-1 items-center border-b border-gray-300">
                             <table className="border">
                               <thead className="border">
-                                <th className="border">Seleccionar</th>
-
-                                <th className="border">N° lote y titular</th>
-
-                                <th className="border">Medición anterior</th>
-                                <th className="border">Medición del mes</th>
-                                <th className="border">Consumo calculado</th>
+                                <tr>
+                                  <th className="border">Seleccionar</th>
+                                  <th className="border">N° lote y titular</th>
+                                  <th className="border">Medición anterior</th>
+                                  <th className="border">Medición del mes</th>
+                                  <th className="border">Consumo calculado</th>
+                                </tr>
                               </thead>
                               <tbody>
-                                <td className="border">
-                                  <input
-                                    type="checkbox"
-                                    id={batch.numero_lote}
-                                    name={
-                                      batch.medidor_luz[
-                                        batch.medidor_luz.length - 1
-                                      ]
-                                    }
-                                    onChange={handleClick}
-                                    checked={isCheck.includes(
-                                      batch.numero_lote
-                                    )}
-                                  />
-                                </td>
-                                <td className="border">
-                                  <label htmlFor={batch.numero_lote}>
-                                    {batch.numero_lote} - {batch.titular}
-                                  </label>
-                                </td>
-                                <td className="border">
-                                  <label htmlFor={batch.numero_lote}>
-                                    {
-                                      batch.medidor_luz[
-                                        batch.medidor_luz.length - 1
-                                      ]
-                                    }
-                                  </label>
-                                </td>
-                                <td className="border">
-                                  <input
-                                    key={batch.id}
-                                    type="text"
-                                    name={
-                                      batch.medidor_luz[
-                                        batch?.medidor_luz.length - 1
-                                      ]
-                                    }
-                                    id={batch.numero_lote}
-                                    className="text-sm w-18  h-5"
-                                    onChange={(e) => handleLightInvocie(e)}
-                                  />
-                                </td>
-                                <td className="border">
-                                  <label htmlFor={batch.numero_lote}>
-                                    {
-                                      Object.entries(editConsumptionCalc)
-                                        .filter(
-                                          (ele) => ele[0] === batch.numero_lote
-                                        )
-                                        .flat()[1]
-                                    }
-                                  </label>
-                                </td>
+                                <tr>
+                                  <td className="border">
+                                    <input
+                                      type="checkbox"
+                                      id={batch.numero_lote}
+                                      name={
+                                        batch.medidor_luz[
+                                          batch.medidor_luz.length - 1
+                                        ]
+                                      }
+                                      onChange={handleClick}
+                                      checked={isCheck.includes(
+                                        batch.numero_lote
+                                      )}
+                                    />
+                                  </td>
+                                  <td className="border">
+                                    <label htmlFor={batch.numero_lote}>
+                                      {batch.numero_lote} - {batch.titular}
+                                    </label>
+                                  </td>
+                                  <td className="border">
+                                    <label htmlFor={batch.numero_lote}>
+                                      {
+                                        batch.medidor_luz[
+                                          batch.medidor_luz.length - 1
+                                        ].split("//")[1]
+                                      }
+                                    </label>
+                                  </td>
+                                  <td className="border">
+                                    <input
+                                      key={batch.id}
+                                      type="text"
+                                      name={
+                                        batch.medidor_luz[
+                                          batch.medidor_luz.length - 1
+                                        ].split("//")[1]
+                                      }
+                                      id={batch.numero_lote}
+                                      className="text-sm w-18  h-5"
+                                      onChange={(e) => handleLightInvocie(e)}
+                                    />
+                                  </td>
+                                  <td className="border">
+                                    <label htmlFor={batch.numero_lote}>
+                                      {
+                                        Object.entries(editConsumptionCalc)
+                                          .filter(
+                                            (ele) =>
+                                              ele[0] === batch.numero_lote
+                                          )
+                                          .flat()[1]
+                                      }
+                                    </label>
+                                  </td>
+                                </tr>
                               </tbody>
                             </table>
                           </div>
@@ -248,50 +266,6 @@ export default function Billing() {
                 </button>
               </form>
             </div>
-          </div>
-        </div>
-
-        <div className="col-span-3 p-2 flex flex-col  items-center  rounded-lg bg-gray-300 shadow-lg ">
-          {/* <h2 className="m-2 font-semibold">ÚLTIMAS FACTURAS</h2> */}
-          <div className="p-2 mb-2 flex flex-col  items-center  rounded-lg bg-gray-300 shadow-lg ">
-            <h2 className="m-2 font-semibold">BUSCAR FACTURA</h2>
-            <div>
-              <div className="flex flex-row items-center justify-center gap-2">
-                <div className="relative ">
-                  <div className="flex absolute inset-y-0 right-0 items-center pl-3 pt-2 pointer-events-none">
-                    <svg
-                      className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                  </div>
-                  <input
-                    // onChange={(e) => handleInputChange(e)}
-                    type="text"
-                    id="input-group-search"
-                    className="block p-2 mt-2 pl-10 w-40 lg:w-56 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
-                    placeholder="Buscar factura..."
-                  />
-                </div>
-                <div className=" flex flex-row items-center gap-2">
-                  <input type="checkbox" id="paid" value={true} />{" "}
-                  <label htmlFor="paid">Pagadas</label>
-                  <input type="checkbox" id="unpaid" value={false} />{" "}
-                  <label htmlFor="unpaid">No pagadas</label>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="overflow-y-auto h-96 bg-gray-100 rounded-lg shadow-lg">
-            <InvoiceCell invoices={invoices} />
           </div>
         </div>
       </div>

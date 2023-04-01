@@ -22,6 +22,9 @@ export default function NeighborBills() {
   return (
     <div className="w-full h-screen flex flex-col bg-gray-900 justify-between">
       <NavBarHome />
+      <div className="overflow-y overflow-x text-center  bg-gray-100 rounded-lg shadow-lg text-red-500">
+   "Ud. tiene  3 facturas sin abonar por un total de $123156"
+      </div>
       <div className="overflow-y overflow-x  lg:h-2/3 bg-gray-100 rounded-lg shadow-lg">
         <BillsCell invoices={loggedUser?.Invoices} />
       </div>

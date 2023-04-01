@@ -4,7 +4,7 @@ import AdminHome from "./adminPages/home/AdminHome";
 import AdminLogin from "./adminPages/login/AdminLogin";
 import Services from "./adminPages/services/Services";
 import Batches from "./components/Batches/Batches";
-import Billing from "./components/Billing/Billing";
+import Billing from "./adminPages/billing/Billing";
 
 function AdminRoutes() {
   const location = useLocation();

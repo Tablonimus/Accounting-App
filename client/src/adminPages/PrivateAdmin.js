@@ -20,9 +20,7 @@ const PrivateAdmin = () => {
       tokenn
     );
 
-  console.log(id);
-
-  console.log(patternId);
+ 
 
   return auth.token && pattern && idd.id && patternId ? (
     <Outlet />

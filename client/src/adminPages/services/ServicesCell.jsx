@@ -12,8 +12,6 @@ export default function ServicesCell({ services }) {
   const [editState, setEditState] = useState(false);
   const [editedService, setEditedService] = useState({});
 
-
-
   function editService(e) {
     setEditedService({
       ...editedService,
@@ -25,20 +23,18 @@ export default function ServicesCell({ services }) {
     });
   }
 
-
-
   function changeState(e) {
     editState === false ? setEditState(true) : setEditState(false);
   }
 
   async function saveButton(e) {
     e.preventDefault();
-    dispatch(patchService(editedService)).then( (a)=> window.location.reload(true))
+    dispatch(patchService(editedService)).then((a) =>
+      window.location.reload(true)
+    );
   }
 
   return (
-
-    
     <div className=" w-full ">
       <Table hoverable={true}>
         <Table.Head>
@@ -120,6 +116,9 @@ export default function ServicesCell({ services }) {
                     <Table.Cell>
                       <input
                         type="text"
+                        id={service.nombre}
+                        name="proveedor"
+                        onChange={(e) => editService(e)}
                         placeholder={service.proveedor}
                         className="w-20 h-4 text-sm rounded-lg"
                       />

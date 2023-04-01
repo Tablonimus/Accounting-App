@@ -26,7 +26,7 @@ export default function ToolsBar() {
       <Link to={`/${id}/bills`}>
         <button className="flex flex-col items-center justify-center m-1   ">
           <img src={factura} className="w-10 rounded-full p-1" />
-          <h5 className="text-sm text-black">Facturas</h5>
+          <h5 className="text-sm text-black">Resumen</h5>
         </button>
       </Link>
 

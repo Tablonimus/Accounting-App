@@ -14,7 +14,7 @@ import "./landing.css";
 export default function Landing() {
   const loggedUser = useSelector((state) => state.loggedUser);
 
-  const id = localStorage.getItem("id");
+ 
 
   return (
     <div className="main  flex flex-col items-center gap-3 justify-between lg:h-screen">
@@ -22,7 +22,7 @@ export default function Landing() {
         <img src={logo} className="h-20" alt="" />
 
         <Link to="/login">
-          <button className="border-2 rounded-lg p-2 bg-gray-300 hover:bg-gray-200 hover:text-cyan-600 h-10 w-32 text-md font-bold shoadow-lg">
+          <button  className="border-2 rounded-lg p-2 bg-gray-300 hover:bg-gray-200 hover:text-cyan-600 h-10 w-32 text-md font-bold shoadow-lg">
             {" "}
             <h3>Iniciar sesión</h3>
           </button>
