@@ -8,22 +8,42 @@ import { getUserProfile } from "../../redux/actions";
 
 export default function NeighborBills() {
   const dispatch = useDispatch();
-  
 
   //   useEffect(() => {
   //     dispatch(getUserProfile(id));
   //   }, [dispatch]);
 
   const loggedUser = useSelector((state) => state.loggedUser);
-  const array = [1, 2, 2, 3, 3, 3];
 
-  console.log("}LA17171717", loggedUser);
+  const invoicesUnpaid = loggedUser?.Invoices.filter(
+    (invoice) => invoice.pagado === false
+  );
+  const totalUnpaid = invoicesUnpaid
+    ? invoicesUnpaid
+        .map((invoice) => invoice.total)
+        .reduce((acc, cur) => parseFloat(acc) + parseFloat(cur), 0)
+    : 0;
+  console.log("}LA17171717", invoicesUnpaid);
 
   return (
     <div className="w-full h-screen flex flex-col bg-gray-900 justify-between">
       <NavBarHome />
-      <div className="overflow-y overflow-x text-center  bg-gray-100 rounded-lg shadow-lg text-red-500">
-   "Ud. tiene  3 facturas sin abonar por un total de $123156"
+      <div className="overflow-y overflow-x text-center p-3 bg-gray-100 rounded-lg shadow-lg">
+        {invoicesUnpaid?.length === 1 ? (
+          <h1 className="text-red-500 text-2xl">
+            {`Tenés ${invoicesUnpaid?.length} comprobante sin abonar por un total de 
+                $${totalUnpaid}`}
+          </h1>
+        ) : invoicesUnpaid?.length > 1 ? (
+          <h1 className=" text-red-500 text-2xl">
+            {`Tenés ${invoicesUnpaid?.length} comprobantes sin abonar por un total de 
+                $${totalUnpaid}`}
+          </h1>
+        ) : (
+          <h1 className=" text-red-500 text-2xl">
+            {`Tus cuentas están al día 👌🏼👍🏼`}
+          </h1>
+        )}
       </div>
       <div className="overflow-y overflow-x  lg:h-2/3 bg-gray-100 rounded-lg shadow-lg">
         <BillsCell invoices={loggedUser?.Invoices} />

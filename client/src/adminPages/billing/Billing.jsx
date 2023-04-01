@@ -8,8 +8,9 @@ import {
   getInvoice,
   getService,
 } from "../../redux/actions";
+
 import { useEffect } from "react";
-import InvoiceCell from "./InvoiceCell";
+
 import AdminNav from "../adminComponents/AdminNav";
 import AdminBar from "../adminComponents/AdminBar";
 import SearchBill from "./SearchBill";
@@ -21,6 +22,7 @@ export default function Billing() {
     dispatch(getInvoice());
     dispatch(getBatch());
     dispatch(getService());
+    //  dispatch(getAll());
   }, [dispatch]);
 
   const batches = useSelector((state) => state.batch);
@@ -40,8 +42,9 @@ export default function Billing() {
   let filter = [];
 
   for (let i = 0; i < batches?.length; i++) {
-    if (checkService === "Luz" && batches[i].luz !== false)
-      filter.push(batches[i]);
+    if (checkService === "Luz" && batches[i].luz !== false);
+
+    filter.push(batches[i]);
     if (checkService === "Internet" && batches[i].internet !== false)
       filter.push(batches[i]);
     if (
@@ -49,7 +52,12 @@ export default function Billing() {
       batches[i].gastos_comunes !== false
     )
       filter.push(batches[i]);
-    if (!checkService || checkService === "Gastos extraordinarios") {
+    if (
+      !checkService ||
+      checkService !== "Internet" ||
+      checkService !== "Luz" ||
+      checkService !== "Gastos Comunes"
+    ) {
       filter.push(batches[i]);
     }
   }
@@ -110,7 +118,8 @@ export default function Billing() {
     }
   }
 
-  console.log();
+  console.log(isCheck);
+  console.log(filter);
   return (
     <div className="flex flex-col bg-gray-200 h-full justify-between main">
       <AdminNav />

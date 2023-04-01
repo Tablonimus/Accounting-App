@@ -124,6 +124,22 @@ export function getUserProfile(id) {
 }
 
 //----------GET---------
+/* export function getAll() {
+  return async function (dispatch) {
+    try {
+      getBatch();
+      getInvoice();
+      getService();
+      dispatch({
+        type: action.EDIT_SERVICE,
+        payload: json.data,
+      });
+    } catch (error) {
+      return `Server Error, try again later: ${error}`;
+    }
+  };
+} */
+
 export function getBatch() {
   return async function (dispatch) {
     try {
@@ -246,7 +262,6 @@ export function patchService(payload) {
   };
 }
 
-
 export function patchInvoice(payload) {
   return async function (dispatch) {
     try {
@@ -262,4 +277,3 @@ export function patchInvoice(payload) {
     }
   };
 }
-

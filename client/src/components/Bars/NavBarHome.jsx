@@ -24,7 +24,7 @@ export default function NavBarHome() {
           arrowIcon={true}
           inline={true}
           label={
-            <div className="bg-green-300 w-12 h-12 rounded-full flex items-center justify-center ring ring-slate-300">
+            <div className="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center ">
               <span className="text-white text-xl font-bold ">{avatar}</span>
             </div>
           }

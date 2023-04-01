@@ -21,7 +21,7 @@ export default function InvoiceCell({ invoices }) {
       },
     });
   }
-  console.log(editedService);
+ 
   function changeState(e) {
     editState === false ? setEditState(true) : setEditState(false);
   }
@@ -37,18 +37,17 @@ export default function InvoiceCell({ invoices }) {
     <div className="w-full">
       <Table hoverable={true} class="  ">
         <Table.Head class="bg-blue-300">
+          <Table.HeadCell>Fecha</Table.HeadCell>
           <Table.HeadCell>N°</Table.HeadCell>
           <Table.HeadCell>Lote</Table.HeadCell>
           <Table.HeadCell>Detalle</Table.HeadCell>
           <Table.HeadCell>Remitente</Table.HeadCell>
           <Table.HeadCell>Monto</Table.HeadCell>
-          <Table.HeadCell>A cta</Table.HeadCell>
           <Table.HeadCell>Interés Acumulado</Table.HeadCell>
-          <Table.HeadCell>Pagado</Table.HeadCell>
+          <Table.HeadCell>A cta</Table.HeadCell>
           <Table.HeadCell>Total</Table.HeadCell>
-          {/*    <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell> */}
+          <Table.HeadCell>Pagado</Table.HeadCell>
+
           {editState === false ? (
             <Table.HeadCell>
               <button
@@ -78,6 +77,13 @@ export default function InvoiceCell({ invoices }) {
                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
                   >
                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {invoices.createdAt
+                        .split("T")[0]
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                    </Table.Cell>
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                       {invoices.id}
                     </Table.Cell>
 
@@ -91,6 +97,11 @@ export default function InvoiceCell({ invoices }) {
                     <Table.Cell>{invoices.remitente}</Table.Cell>
                     <Table.Cell>${invoices.importe_facturado}</Table.Cell>
                     <Table.Cell>
+                      <span className="font-bold text-red-500">
+                        {invoices.intereses.slice(1).map((p) => `+%${p * 100}`)}
+                      </span>
+                    </Table.Cell>
+                    <Table.Cell>
                       <span className="font-bold text-green-500">
                         $
                         {invoices.a_cuenta.reduce(
@@ -98,11 +109,6 @@ export default function InvoiceCell({ invoices }) {
                             parseFloat(accumulator) + parseFloat(currentValue),
                           0
                         )}
-                      </span>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <span className="font-bold text-red-500">
-                        {invoices.intereses.slice(1).map((p) => `+%${p * 100}`)}
                       </span>
                     </Table.Cell>
                     <Table.Cell>
@@ -139,6 +145,14 @@ export default function InvoiceCell({ invoices }) {
                     key={invoices.id}
                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
                   >
+                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {invoices.createdAt
+                        .split("T")[0]
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                    </Table.Cell>
+                    
                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                       {invoices.id}
                     </Table.Cell>
