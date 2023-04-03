@@ -5,12 +5,26 @@ import recibo from "../../assets/images/recibos2.png";
 import servicio from "../../assets/images/waiter.png";
 import factura from "../../assets/images/recibos.png";
 import home from "../../assets/images/homeslogo.png";
+import generals from "../../assets/images/balance.png";
 
 export default function AdminBar() {
   const url = window.location.pathname;
 
   return (
-    <div className="flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-screen sticky bottom-0 bg-gray-100 ">
+    <div className="mt-20 flex flex-row shadow-lg justify-around lg:justify-center lg:gap-16 h-16 w-screen sticky bottom-0 bg-gray-100 ">
+      <Link to="/admin/generals">
+        {url === "/admin/generals" ? (
+          <button className="flex flex-col items-center justify-center m-1  ">
+            <img src={generals} className="w-10 rounded-full bg-gray-300 p-1" />
+            <h5 className=" font-bold text-sm text-black">General</h5>
+          </button>
+        ) : (
+          <button className="flex flex-col items-center justify-center m-1 ">
+            <img src={generals} className="w-10 rounded-full p-1" />
+            <h5 className="text-sm text-black">General</h5>
+          </button>
+        )}
+      </Link>
       <Link to="/admin/services">
         {url === "/admin/services" ? (
           <button className="flex flex-col items-center justify-center m-1  ">
@@ -21,7 +35,6 @@ export default function AdminBar() {
           <button className="flex flex-col items-center justify-center m-1 ">
             <img src={servicio} className="w-10 rounded-full p-1" />
             <h5 className="text-sm text-black">Servicios</h5>
-            <span className=""> </span>
           </button>
         )}
       </Link>
@@ -35,7 +48,6 @@ export default function AdminBar() {
           <button className="flex flex-col items-center justify-center m-1   ">
             <img src={factura} className="w-10 rounded-full p-1" />
             <h5 className="text-sm text-black">Facturación</h5>
-            <span className=""> </span>
           </button>
         )}
       </Link>
@@ -50,7 +62,6 @@ export default function AdminBar() {
           <button className="flex flex-col items-center justify-center m-1   ">
             <img src={recibo} className="w-10 rounded-full p-1" />
             <h5 className="text-sm text-black">Recibos</h5>
-            <span className=""> </span>
           </button>
         )}
       </Link>
@@ -64,7 +75,6 @@ export default function AdminBar() {
           <button className="flex flex-col items-center justify-center m-1   ">
             <img src={home} className="w-10 rounded-full p-1" />
             <h5 className="text-sm text-black">Lotes</h5>
-            <span className=""> </span>
           </button>
         )}
       </Link>

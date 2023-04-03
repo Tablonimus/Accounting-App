@@ -29,6 +29,8 @@ import PrivateAdmin from "./adminPages/PrivateAdmin";
 import Batches from "./components/Batches/Batches";
 import Billing from "./adminPages/billing/Billing";
 import Services from "./adminPages/services/Services";
+import Balance from "./adminPages/balance/Generals";
+import Generals from "./adminPages/balance/Generals";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +64,7 @@ function App() {
 
         <Route element={<PrivateAdmin />}>
           <Route exact path={"/admin"} element={<AdminHome />} />
+          <Route path={"/admin/generals"} element={<Generals />} />
           <Route path={"/admin/batches"} element={<Batches />} />
           <Route path={"/admin/billing"} element={<Billing />} />
           <Route path={"/admin/services"} element={<Services />} />

@@ -26,7 +26,7 @@ export default function AdminNav() {
   return (
     <Navbar
       rounded={true}
-      className="z-30 sticky top-0 bg-gray-100 h-18 w-full pl-5 py-2"
+      className="z-30 sticky top-0 bg-gray-100 h-18 w-screen pl-5 py-2"
     >
       <Navbar.Brand href="">
         <img src={homeslogo} className="mr-3 h-6 sm:h-9" alt="" />

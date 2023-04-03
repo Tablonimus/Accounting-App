@@ -278,6 +278,7 @@ export default function Billing() {
           </div>
         </div>
       </div>
+
       <AdminBar />
     </div>
   );
