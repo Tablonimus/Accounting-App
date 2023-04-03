@@ -14,7 +14,7 @@ export default function Generals() {
             <FacturasBarrio />
           </Tabs.Item>
 
-          <Tabs.Item active={true} title="Dashboard" icon={""}>
+          <Tabs.Item  title="Dashboard" icon={""}>
             Dashboard content
           </Tabs.Item>
           <Tabs.Item title="Settings" icon={""}>

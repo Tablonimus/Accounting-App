@@ -42,7 +42,7 @@ export default function BillsCell({ invoices }) {
 
                     <Table.Cell>{invoices.numero_lote}</Table.Cell>
                     <Table.Cell>
-                      <Tooltip  
+                      <Tooltip
                         content={invoices.detalle}
                         animation="duration-1000"
                       >{`${invoices.detalle.slice(0, 18)}...`}</Tooltip>
@@ -65,16 +65,15 @@ export default function BillsCell({ invoices }) {
                       </span>
                     </Table.Cell>
                     <Table.Cell>
-                      {
-                        invoices.total == 0 ?
+                      {invoices.total == 0 ? (
                         <span className="font-bold text-green-500">
-                        ${invoices.total}
-                      </span>: <span className="font-bold text-red-500">
-                        ${invoices.total}
-                      </span>
-
-                      }
-                     
+                          ${invoices.total}
+                        </span>
+                      ) : (
+                        <span className="font-bold text-red-500">
+                          ${invoices.total}
+                        </span>
+                      )}
                     </Table.Cell>
                     <Table.Cell>
                       {" "}
