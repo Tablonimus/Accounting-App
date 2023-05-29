@@ -166,16 +166,7 @@ export default function InvoiceCell({ invoices }) {
                     </Table.Cell>
                     <Table.Cell>{invoices.remitente}</Table.Cell>
                     <Table.Cell>${invoices.importe_facturado}</Table.Cell>
-                    <Table.Cell>
-                      <input
-                        type="number"
-                        id={invoices.id}
-                        name="a_cuenta"
-                        onChange={(e) => editService(e)}
-                        placeholder={invoices.a_cuenta}
-                        className="w-20 h-4 text-sm rounded-lg"
-                      />
-                    </Table.Cell>
+                 
                     <Table.Cell>
                       <input
                         type="number"
@@ -187,6 +178,22 @@ export default function InvoiceCell({ invoices }) {
                       />
                     </Table.Cell>
                     <Table.Cell>
+                      <input
+                        type="number"
+                        id={invoices.id}
+                        name="a_cuenta"
+                        onChange={(e) => editService(e)}
+                        placeholder={invoices.a_cuenta}
+                        className="w-20 h-4 text-sm rounded-lg"
+                      />
+                    </Table.Cell>
+                   
+                    <Table.Cell>
+                      <span className="font-bold text-red-500">
+                        ${invoices.total}
+                      </span>
+                    </Table.Cell>
+                    <Table.Cell>
                       {" "}
                       {invoices.pagado === false ? (
                         <span className="font-bold text-red-500">No</span>
@@ -194,12 +201,6 @@ export default function InvoiceCell({ invoices }) {
                         <span className="font-bold text-green-500">Si</span>
                       )}
                     </Table.Cell>
-                    <Table.Cell>
-                      <span className="font-bold text-red-500">
-                        ${invoices.total}
-                      </span>
-                    </Table.Cell>
-
                     <Table.Cell>
                       <a
                         href="/tables"

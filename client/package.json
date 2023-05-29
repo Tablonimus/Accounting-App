@@ -27,6 +27,7 @@
     "redux-toolkit": "^1.1.2",
     "sweetalert2": "^11.4.8",
     "tailwind": "^4.0.0",
+    "update": "^0.4.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
