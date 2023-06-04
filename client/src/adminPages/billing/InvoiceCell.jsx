@@ -21,7 +21,7 @@ export default function InvoiceCell({ invoices }) {
       },
     });
   }
- 
+
   function changeState(e) {
     editState === false ? setEditState(true) : setEditState(false);
   }
@@ -145,14 +145,14 @@ export default function InvoiceCell({ invoices }) {
                     key={invoices.id}
                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
                   >
-                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                       {invoices.createdAt
                         .split("T")[0]
                         .split("-")
                         .reverse()
                         .join("-")}
                     </Table.Cell>
-                    
+
                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                       {invoices.id}
                     </Table.Cell>
@@ -166,7 +166,7 @@ export default function InvoiceCell({ invoices }) {
                     </Table.Cell>
                     <Table.Cell>{invoices.remitente}</Table.Cell>
                     <Table.Cell>${invoices.importe_facturado}</Table.Cell>
-                 
+
                     <Table.Cell>
                       <input
                         type="number"
@@ -187,7 +187,7 @@ export default function InvoiceCell({ invoices }) {
                         className="w-20 h-4 text-sm rounded-lg"
                       />
                     </Table.Cell>
-                   
+
                     <Table.Cell>
                       <span className="font-bold text-red-500">
                         ${invoices.total}

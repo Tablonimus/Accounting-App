@@ -42,23 +42,24 @@ export default function Billing() {
   let filter = [];
 
   for (let i = 0; i < batches?.length; i++) {
-    if (checkService === "Luz" && batches[i].luz !== false);
-
-    filter.push(batches[i]);
-    if (checkService === "Internet" && batches[i].internet !== false)
+    if (checkService === "Luz" && batches[i].luz !== false) {
       filter.push(batches[i]);
-    if (
+    } else if (checkService === "Internet" && batches[i].internet !== false) {
+      filter.push(batches[i]);
+    } else if (
       checkService === "Gastos Comunes" &&
       batches[i].gastos_comunes !== false
-    )
+    ) {
       filter.push(batches[i]);
-    if (
+    } else if (
       !checkService ||
       checkService !== "Internet" ||
       checkService !== "Luz" ||
       checkService !== "Gastos Comunes"
     ) {
-      filter.push(batches[i]);
+      {
+        filter.push(batches[i]);
+      }
     }
   }
 
@@ -98,7 +99,8 @@ export default function Billing() {
   }
 
   //-----------------------------------
-  function setBilling() {
+  function setBilling(e) {
+    e.preventDefault();
     let sources = {
       service: checkService,
       batches: isCheck,
@@ -113,8 +115,10 @@ export default function Billing() {
     alert("Se crearan facturas");
     if (checkService === "Luz") {
       dispatch(createLightInvoice(lightSources));
-    } else {
+    } else if (checkService && checkService !== "Luz") {
       dispatch(createInvoice(sources));
+    } else {
+      alert("Debes elegir un servicio a facturar");
     }
   }
 
@@ -269,7 +273,7 @@ export default function Billing() {
                 </div>
                 <button
                   className="w-24 h-14 m-3 rounded-lg  bg-red-500 hover:bg-red-600 font-bold text-white shadow-lg border-slate-500 border-black"
-                  onClick={setBilling}
+                  onClick={(e) => setBilling(e)}
                 >
                   Facturar
                 </button>
